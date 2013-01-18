@@ -4,6 +4,7 @@
 #Mouse functions in OS X
 from Quartz.CoreGraphics import CGEventCreateMouseEvent
 from Quartz.CoreGraphics import CGEventPost
+from Quartz.CoreGraphics import CGDisplayBounds
 from Quartz.CoreGraphics import kCGEventMouseMoved
 from Quartz.CoreGraphics import kCGEventLeftMouseDragged
 from Quartz.CoreGraphics import kCGEventLeftMouseDown
@@ -47,6 +48,8 @@ def mouseRightClick(posx,posy):
 #And also to make cross-platforming easier
 class cursor(object):
     def __init__(self):
+        self.x_max = CGDisplayBounds(0).size.width
+        self.y_max = CGDisplayBounds(0).size.height
         self.left_button_pressed = False
         self.x = 0
         self.y = 0
@@ -54,10 +57,19 @@ class cursor(object):
     def move(self, posx, posy):
         self.x = posx
         self.y = posy
+        if self.x > self.x_max: 
+            self.x = self.x_max
+        if self.y > self.y_max: 
+            self.y = self.y_max
+        if self.x < 0.0: 
+            self.x = 0.0
+        if self.y < 0.0: 
+            self.y = 0.0
+        print self.x, self.y
         if self.left_button_pressed: #We are dragging
-            mouseDrag(posx, posy)
+            mouseDrag(self.x, self.y)
         else: #We are not dragging
-            mouseMove(posx, posy)
+            mouseMove(self.x, self.y)
 
     def click(self, posx=None, posy=None):
         if posx == None:
