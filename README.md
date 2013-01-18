@@ -1,4 +1,3 @@
-PyLeapMouse
 README:
 
 This is my Proof-of-concept code for a Leap-based mouse controller. It only works on OS X as-is, but if you wanted to rewrite Mouse.py for your OS, it should work fine. This was designed for API 0.7.1.
