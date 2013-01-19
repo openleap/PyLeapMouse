@@ -67,16 +67,15 @@ class Listener(Leap.Listener): #The Listener that we attach to the controller
         if not fingers.empty: #Make sure we have some fingers to work with
             sorted_fingers = sort_fingers_by_distance_from_screen(fingers) #Prioritize fingers by distance from screen
             finger_velocity = sorted_fingers[0].tip_velocity #Get the velocity of the forwardmost finger
-            if abs(finger_velocity.y) > 150: #Check if the fingers are moving quickly
-                #The following algorithm was designed to reflect what I think is a comfortable
-                #Scrolling behavior.
-                vel = finger_velocity.y #Save to a shorter variable
-                vel = vel * -.25 #Negate and scale
-                vel = vel + math.copysign(300, vel) #Add/subtract 300 to velocity
-                vel = vel / 150
-                vel = vel ** 3 #Cube vel
-                vel = vel / 4
-                self.cursor.scroll(0, vel)
+            #The following algorithm was designed to reflect what I think is a comfortable
+            #Scrolling behavior.
+            vel = finger_velocity.y #Save to a shorter variable
+            vel = vel + math.copysign(300, vel) #Add/subtract 300 to velocity
+            vel = vel / 150
+            vel = vel ** 3 #Cube vel
+            vel = vel / 8
+            vel = vel * -1 #Negate direction, depending on how you like to scroll
+            self.cursor.scroll(0, vel)
 
     def do_mouse_stuff(self, hand): #Take a hand and use it as a mouse
         fingers = hand.fingers #The list of fingers on said hand
