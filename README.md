@@ -7,7 +7,7 @@ Operation is as follows:
 1)Insert your hand into frame.
 2)The forwardmost finger that the program detects is the mouse finger. Where it points, the cursor goes.
 3)Stick your thumb out (see note) to click down, and fold your thumb in to click up.
-4)Using two pointer fingers (e.g. index and middle) goes into scroll mode, which sucks but shows how it might work.
+4)Using two pointer fingers (e.g. index and middle) goes into scroll mode, which is not very intuitive but shows how it might work. The fingertips must be within a short distance of each other to activate scroll mode.
 
 (note) The Leap software at the moment (v0.7.1) is a little iffy about detecting thumbs, and it helps to keep your arm straight out in front of you. It takes a little practice to figure out how to hold your thumb correctly. You may want to un-comment some debug prints to help you figure out when Leap thinks you have your thumb out. Apparently 0.7.3 has better thumb detection, but it is not available at the time of writing.
 
