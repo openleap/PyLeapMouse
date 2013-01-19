@@ -5,6 +5,10 @@
 from Quartz.CoreGraphics import CGEventCreateMouseEvent
 from Quartz.CoreGraphics import CGEventPost
 from Quartz.CoreGraphics import CGDisplayBounds
+from Quartz.CoreGraphics import CGEventCreateScrollWheelEvent
+from Quartz.CoreGraphics import CGEventSourceCreate
+from Quartz.CoreGraphics import kCGScrollEventUnitPixel
+from Quartz.CoreGraphics import kCGScrollEventUnitLine
 from Quartz.CoreGraphics import kCGEventMouseMoved
 from Quartz.CoreGraphics import kCGEventLeftMouseDragged
 from Quartz.CoreGraphics import kCGEventLeftMouseDown
@@ -44,6 +48,16 @@ def mouseRightClick(posx,posy):
     mouseEvent(kCGEventRightMouseDown, posx, posy, kCGMouseButtonRight);
     mouseEvent(kCGEventRightMouseUp, posx, posy, kCGMouseButtonRight);
 
+def mouseScroll(x_movement, y_movement): #Movements should be no larger than +- 10
+    scrollWheelEvent = CGEventCreateScrollWheelEvent(
+            None, #No source
+            kCGScrollEventUnitPixel, #We are using pixel units
+            2, #Number of wheels(dimensions)
+            y_movement,
+            x_movement)
+    CGEventPost(kCGHIDEventTap, scrollWheelEvent)
+
+
 #Why make a class? So we can call click(), move() etc. without specifying coordinates, state, whatever
 #And also to make cross-platforming easier
 class cursor(object):
@@ -65,7 +79,7 @@ class cursor(object):
             self.x = 0.0
         if self.y < 0.0: 
             self.y = 0.0
-        print self.x, self.y
+        #print self.x, self.y
         if self.left_button_pressed: #We are dragging
             mouseDrag(self.x, self.y)
         else: #We are not dragging
@@ -106,3 +120,6 @@ class cursor(object):
         if posy == None:
             posy = self.y
         mouseRightClick(posx, posy)
+
+    def scroll(self, x_movement, y_movement):
+        mouseScroll(x_movement, y_movement)

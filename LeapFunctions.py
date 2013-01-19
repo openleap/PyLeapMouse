@@ -31,17 +31,16 @@ class Listener(Leap.Listener): #The Listener that we attach to the controller
         super(Listener, self).__init__() #Initialize like a normal listener
         #Initialize a bunch of stuff specific to this implementation
         self.screen = None
-        self.width = 0
-        self.height = 0
+        self.screen_resolution = (0,0)
         self.cursor = cursor #The cursor object that lets us control mice cross-platform
         self.mouse_button_debouncer = debouncer(5) #A signal debouncer that ensures a reliable, non-jumpy click
+        self.most_recent_pointer_finger_id = None #This holds the ID of the most recently used pointing finger, to prevent annoying switching
 
     def on_init(self, controller):
         if controller.calibrated_screens.empty:
             print "Calibrate your Leap screen feature"
         self.screen = controller.calibrated_screens[0]
-        self.width = self.screen.width_pixels
-        self.height = self.screen.height_pixels
+        self.screen_resolution = (self.screen.width_pixels, self.screen.height_pixels)
 
         print "Initialized"
 
@@ -58,33 +57,94 @@ class Listener(Leap.Listener): #The Listener that we attach to the controller
         frame = controller.frame() #Grab the latest 3D data
         if not frame.hands.empty: #Make sure we have some hands to work with
             hand = frame.hands[0] #The first hand
-            fingers = hand.fingers #The list of fingers on said hand
-            if not fingers.empty: #Make sure we have some fingers to work with
-                sorted_fingers = sort_fingers_by_distance_from_screen(fingers) #Prioritize fingers by distance from screen
-                pointer_finger = sorted_fingers[0] #Finger closest to screen
-                intersection = self.screen.intersect(pointer_finger, True) #Where the finger projection intersects with the screen
-                if not math.isnan(intersection.x) and not math.isnan(intersection.y): #If the finger intersects with the screen
-                    x_coord = intersection.x * self.width #x pixel of intersection
-                    y_coord = (1.0 - intersection.y) * self.height #y pixel of intersection
-                    #print x_coord, y_coord #For debugging
-                    self.cursor.move(x_coord,y_coord) #Move the cursor
-                    if len(hand.fingers) > 1: #We've found a thumb!
-                        #print "second finger detected"
-                        #print '+'
-                        self.mouse_button_debouncer.signal(True) #We have detected a possible click. The debouncer ensures that we don't have click jitter
-                    else:
-                        #print '-'
-                        self.mouse_button_debouncer.signal(False) #Same as above
+            if has_two_pointer_fingers(hand): #Scroll mode
+                self.do_scroll_stuff(hand)
+            else: #Mouse mode
+                self.do_mouse_stuff(hand)
 
-                    if self.cursor.left_button_pressed != self.mouse_button_debouncer.state: #We need to push/unpush the cursor's button
-                        #print "clicked:"
-                        #print self.mouse_button_debouncer.state
-                        self.cursor.set_left_button_pressed(self.mouse_button_debouncer.state) #Set the cursor to click/not click
+    def do_scroll_stuff(self, hand): #Take a hand and use it as a scroller
+        fingers = hand.fingers #The list of fingers on said hand
+        if not fingers.empty: #Make sure we have some fingers to work with
+            sorted_fingers = sort_fingers_by_distance_from_screen(fingers) #Prioritize fingers by distance from screen
+            finger_velocity = sorted_fingers[0].tip_velocity #Get the velocity of the forwardmost finger
+            if abs(finger_velocity.y) > 150: #Check if the fingers are moving quickly
+                #The following algorithm was designed to reflect what I think is a comfortable
+                #Scrolling behavior.
+                vel = finger_velocity.y #Save to a shorter variable
+                vel = vel * -.25 #Negate and scale
+                vel = vel + math.copysign(300, vel) #Add/subtract 300 to velocity
+                vel = vel / 150
+                vel = vel ** 3 #Cube vel
+                vel = vel / 4
+                self.cursor.scroll(0, vel)
+
+    def do_mouse_stuff(self, hand): #Take a hand and use it as a mouse
+        fingers = hand.fingers #The list of fingers on said hand
+        if not fingers.empty: #Make sure we have some fingers to work with
+            pointer_finger = self.select_pointer_finger(fingers) #Determine which finger to use
+            intersection = self.screen.intersect(pointer_finger, True) #Where the finger projection intersects with the screen
+            if not math.isnan(intersection.x) and not math.isnan(intersection.y): #If the finger intersects with the screen
+                x_coord = intersection.x * self.screen_resolution[0] #x pixel of intersection
+                y_coord = (1.0 - intersection.y) * self.screen_resolution[1] #y pixel of intersection
+                #print x_coord, y_coord #For debugging
+                self.cursor.move(x_coord,y_coord) #Move the cursor
+                if has_thumb(hand): #We've found a thumb!
+                    #print "thumb detected"
+                    #print '+'
+                    self.mouse_button_debouncer.signal(True) #We have detected a possible click. The debouncer ensures that we don't have click jitter
+                else:
+                    #print '-'
+                    self.mouse_button_debouncer.signal(False) #Same idea as above (but opposite)
+
+                if self.cursor.left_button_pressed != self.mouse_button_debouncer.state: #We need to push/unpush the cursor's button
+                    #print "clicked:"
+                    #print self.mouse_button_debouncer.state
+                    self.cursor.set_left_button_pressed(self.mouse_button_debouncer.state) #Set the cursor to click/not click
+
+    def select_pointer_finger(self, possible_fingers): #Choose the best pointer finger
+        sorted_fingers = sort_fingers_by_distance_from_screen(possible_fingers) #Prioritize fingers by distance from screen
+        if self.most_recent_pointer_finger_id != None: #If we have a previous pointer finger in memory
+             for finger in sorted_fingers: #Look at all the fingers
+                if finger.id == self.most_recent_pointer_finger_id: #The previously used pointer finger is still in frame
+                    return finger #Keep using it
+        #If we got this far, it means we don't have any previous pointer fingers OR we didn't find the most recently used pointer finger in the frame
+        self.most_recent_pointer_finger_id = sorted_fingers[0].id #This is the new pointer finger
+        return sorted_fingers[0]
+                    
 
 def sort_fingers_by_distance_from_screen(fingers):
     new_finger_list = [finger for finger in fingers] #Copy the list of fingers
     new_finger_list.sort(key=lambda x: x.tip_position.z) #Sort by increasing z
     return new_finger_list #Lower indices = closer to screen
+
+def has_thumb(hand): #The level of accuracy with this function is surprisingly high
+    if hand.fingers.empty: #We assume no thumbs
+        return False
+    distances = []
+    palm_position = Geometry.to_vector(hand.palm_position)
+    for finger in hand.fingers: #Make a list of all distances from the center of the palm
+        finger_position = Geometry.to_vector(finger.tip_position)
+        difference = finger_position - palm_position
+        distances.append(difference.norm()) #Record the distance from the palm to the fingertip
+    average = sum(distances)/len(distances)
+    minimum = min(distances)
+    if average - minimum > 20: #Check if the finger closest to the palm is more than 20mm closer than the average distance
+        return True
+    else:
+        return False
+
+def has_two_pointer_fingers(hand): #Checks if we are using two pointer fingers
+    if len(hand.fingers) < 2: #Obviously not
+        return False
+    sorted_fingers = sort_fingers_by_distance_from_screen(hand.fingers)
+    finger1_pos = Geometry.to_vector(sorted_fingers[0].tip_position)
+    finger2_pos = Geometry.to_vector(sorted_fingers[1].tip_position)
+    difference = finger1_pos - finger2_pos
+    if difference.norm() < 40: #Check if the fingertips are close together
+        return True
+    else:
+        return False
+
 
 #Check if the vectors of length 'vector_length' shooting out of a pair of fingers intersect within tolerance 'tolerance'
 def finger_vectors_intersect(finger1, finger2, vector_length, tolerance):
