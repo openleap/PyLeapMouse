@@ -144,7 +144,6 @@ def has_two_pointer_fingers(hand): #Checks if we are using two pointer fingers
     else:
         return False
 
-
 #Check if the vectors of length 'vector_length' shooting out of a pair of fingers intersect within tolerance 'tolerance'
 def finger_vectors_intersect(finger1, finger2, vector_length, tolerance):
     #Take Leap Finger objects and produce two line segment objects

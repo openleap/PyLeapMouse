@@ -39,6 +39,12 @@ class vector(object):
         return vector(self.x/magnitude, self.y/magnitude, self.z/magnitude)
     def to_leap(self):
         return Leap.Vector(self.x, self.y, self.z)
+    def pitch(self):
+        return math.atan(self.z/self.y)
+    def roll(self):
+        return math.atan(self.x/self.y)
+    def yaw(self):
+        return math.atan(self.x/self.z)
 
 class segment(object):
     def __init__(self, point1, point2):
@@ -144,4 +150,3 @@ def angle_between_vectors(vector1, vector2):
     bottom = vector1.norm() * vector2.norm()
     angle = math.acos(top/bottom)
     return angle #In radians
-
