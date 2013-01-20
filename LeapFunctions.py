@@ -31,11 +31,12 @@ class mouse_manager(object):
             self.xcounter = 0.0
             self.ycounter = 0.0
 
+        #Returns the integer part of the mouse movement, stores the leftover float part for later
         def add(self, (x, y)):
             self.xcounter = self.xcounter + x
             self.ycounter = self.ycounter + y
-            split_x = math.modf(self.xcounter)#saves the float part (remainder) into the counter
-            split_y = math.modf(self.ycounter)#and the int part into the movement
+            split_x = math.modf(self.xcounter) #Saves the float part (remainder) into the counter
+            split_y = math.modf(self.ycounter) #And the int part into the movement
             self.xcounter = split_x[0]
             xmovement = int(split_x[1])
             self.ycounter = split_y[0]
