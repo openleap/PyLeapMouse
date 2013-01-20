@@ -26,6 +26,23 @@ class debouncer(object): #Takes a "signal" and debounces it.
             self.opposite_counter = 0 #we reset the number of contrary samples
         return self.state #return the debounced signal (may help keep code cleaner)
 
+class mouse_manager(object):
+        def __init__(self):
+            self.xcounter = 0.0
+            self.ycounter = 0.0
+
+        def add(self, (x, y)):
+            self.xcounter = self.xcounter + x
+            self.ycounter = self.ycounter + y
+            split_x = math.modf(self.xcounter)#saves the float part (remainder) into the counter
+            split_y = math.modf(self.ycounter)#and the int part into the movement
+            self.xcounter = split_x[0]
+            xmovement = int(split_x[1])
+            self.ycounter = split_y[0]
+            ymovement = int(split_y[1])
+            return xmovement, ymovement   
+
+
 class Listener(Leap.Listener): #The Listener that we attach to the controller
     def __init__(self, cursor):
         super(Listener, self).__init__() #Initialize like a normal listener
@@ -34,7 +51,7 @@ class Listener(Leap.Listener): #The Listener that we attach to the controller
         self.screen_resolution = (0,0)
         self.cursor = cursor #The cursor object that lets us control mice cross-platform
         self.mouse_button_debouncer = debouncer(5) #A signal debouncer that ensures a reliable, non-jumpy click
-        self.most_recent_pointer_finger_id = None #This holds the ID of the most recently used pointing finger, to prevent annoying switching
+        self.mouse_manager = mouse_manager()
 
     def on_init(self, controller):
         if controller.calibrated_screens.empty:
@@ -56,65 +73,38 @@ class Listener(Leap.Listener): #The Listener that we attach to the controller
     def on_frame(self, controller):
         frame = controller.frame() #Grab the latest 3D data
         if not frame.hands.empty: #Make sure we have some hands to work with
-            hand = frame.hands[0] #The first hand
-            if has_two_pointer_fingers(hand): #Scroll mode
-                self.do_scroll_stuff(hand)
-            else: #Mouse mode
-                self.do_mouse_stuff(hand)
-
-    def do_scroll_stuff(self, hand): #Take a hand and use it as a scroller
-        fingers = hand.fingers #The list of fingers on said hand
-        if not fingers.empty: #Make sure we have some fingers to work with
-            sorted_fingers = sort_fingers_by_distance_from_screen(fingers) #Prioritize fingers by distance from screen
-            finger_velocity = sorted_fingers[0].tip_velocity #Get the velocity of the forwardmost finger
-            x_scroll = self.velocity_to_scroll_amount(finger_velocity.x)
-            y_scroll = self.velocity_to_scroll_amount(finger_velocity.y)
-            self.cursor.scroll(x_scroll, y_scroll)
-
-    def velocity_to_scroll_amount(self, velocity): #Converts a finger velocity to a scroll velocity
-        #The following algorithm was designed to reflect what I think is a comfortable
-        #Scrolling behavior.
-        vel = velocity #Save to a shorter variable
-        vel = vel + math.copysign(300, vel) #Add/subtract 300 to velocity
-        vel = vel / 150
-        vel = vel ** 3 #Cube vel
-        vel = vel / 8
-        vel = vel * -1 #Negate direction, depending on how you like to scroll
-        return vel
-
+            rightmost_hand = None #We always have at least one "right hand"
+            if len(frame.hands) < 2: #Just one hand
+                rightmost_hand = frame.hands[0]
+            else: #Multiple hands. We have a right AND a left
+                rightmost_hand = max(frame.hands, key=lambda hand: hand.palm_position.x) #Get rightmost hand
+                leftmost_hand = min(frame.hands, key=lambda hand: hand.palm_position.x) #Get leftmost hand
+                self.do_gesture_recognition(leftmost_hand) #This may or may not run
+            self.do_mouse_stuff(rightmost_hand) #This will always run when a hand is present
+                       
     def do_mouse_stuff(self, hand): #Take a hand and use it as a mouse
-        fingers = hand.fingers #The list of fingers on said hand
-        if not fingers.empty: #Make sure we have some fingers to work with
-            pointer_finger = self.select_pointer_finger(fingers) #Determine which finger to use
-            intersection = self.screen.intersect(pointer_finger, True) #Where the finger projection intersects with the screen
-            if not math.isnan(intersection.x) and not math.isnan(intersection.y): #If the finger intersects with the screen
-                x_coord = intersection.x * self.screen_resolution[0] #x pixel of intersection
-                y_coord = (1.0 - intersection.y) * self.screen_resolution[1] #y pixel of intersection
-                #print x_coord, y_coord #For debugging
-                self.cursor.move(x_coord,y_coord) #Move the cursor
-                if has_thumb(hand): #We've found a thumb!
-                    #print "thumb detected"
-                    #print '+'
-                    self.mouse_button_debouncer.signal(True) #We have detected a possible click. The debouncer ensures that we don't have click jitter
-                else:
-                    #print '-'
-                    self.mouse_button_debouncer.signal(False) #Same idea as above (but opposite)
+         hand_normal_direction = Geometry.to_vector(hand.palm_normal)
+         hand_direction = Geometry.to_vector(hand.direction)
+         roll = hand_normal_direction.roll()
+         pitch = hand_normal_direction.pitch()
+         mouse_velocity = self.convert_angles_to_mouse_velocity(roll, pitch)
+         movement = self.mouse_manager.add(mouse_velocity)
+         self.cursor.move(self.cursor.x + movement[0], self.cursor.y + movement[1])
 
-                if self.cursor.left_button_pressed != self.mouse_button_debouncer.state: #We need to push/unpush the cursor's button
-                    #print "clicked:"
-                    #print self.mouse_button_debouncer.state
-                    self.cursor.set_left_button_pressed(self.mouse_button_debouncer.state) #Set the cursor to click/not click
+    def convert_angles_to_mouse_velocity(self, roll, pitch): #Angles are in radians
+        x_movement = 5.0*math.copysign((4.0*math.sin(roll) + 2.0*roll)*math.sin(roll), roll)
+        y_movement = 5.0*math.copysign((4.0*math.sin(pitch) + 2.0*pitch)*math.sin(pitch), pitch)
+        return (x_movement, y_movement)
 
-    def select_pointer_finger(self, possible_fingers): #Choose the best pointer finger
-        sorted_fingers = sort_fingers_by_distance_from_screen(possible_fingers) #Prioritize fingers by distance from screen
-        if self.most_recent_pointer_finger_id != None: #If we have a previous pointer finger in memory
-             for finger in sorted_fingers: #Look at all the fingers
-                if finger.id == self.most_recent_pointer_finger_id: #The previously used pointer finger is still in frame
-                    return finger #Keep using it
-        #If we got this far, it means we don't have any previous pointer fingers OR we didn't find the most recently used pointer finger in the frame
-        self.most_recent_pointer_finger_id = sorted_fingers[0].id #This is the new pointer finger
-        return sorted_fingers[0]
-                    
+    def do_gesture_recognition(self, hand):
+        if not hand.fingers.empty: #One or more open fingers on this hand
+            self.mouse_button_debouncer.signal(True) #Tell the debouncer we got a positive sample
+        else: #No open fingers
+            self.mouse_button_debouncer.signal(False) #Tell the debouncer we got a negative sample
+        if self.mouse_button_debouncer.state != self.cursor.left_button_pressed: #The cursor should be pressed/unpressed
+            self.cursor.set_left_button_pressed(self.mouse_button_debouncer.state)
+
+
 
 def sort_fingers_by_distance_from_screen(fingers):
     new_finger_list = [finger for finger in fingers] #Copy the list of fingers
