@@ -4,9 +4,13 @@ This is my Proof-of-concept code for a Leap Motion-based mouse controller. It on
 
 USAGE:
 Operation is as follows:
-1)The tilt of your right hand controls mouse movement. If you only use one hand, the program assumes it's your right one.
-2) Your left hand controls clicking. Simply extend any finger on your left hand to click down, and fold it back in to click up.
-This is a somewhat unintuitive method of operation, but I find that it gives exceptionally better control than the most obvious "point-at-screen" method of mouse control. With this two-handed tilt based mode, it is easy to hit and properly engage small buttons.
+One hand in frame: The tilt of this hand moves the mouse.
+Two hands in frame: Left hand controls action.
+    All fingers closed: Mouse movement with right hand tilt.
+    One finger open: Clicking. Left mouse button is down. Mouse movement with right hand tilt.
+    Two fingers open: Scrolling. Scrolling with right hand movement.
+
+This is a somewhat unintuitive method of operation, but I find that it gives exceptionally better control than the most obvious "point-at-screen" method of mouse control. With this two-handed tilt based mode, it is easy to hit and properly engage small buttons, scroll through webpages, etc.
 
 CONFIGURATION:
 1)Configure your Leap screen from the Leap menu.
