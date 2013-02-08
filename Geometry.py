@@ -1,10 +1,14 @@
 #William Yager
 #Leap Python mouse controller POC
+
+
 import math
 import Leap
 
+
 def to_vector(leap_vector):
     return vector(leap_vector.x, leap_vector.y, leap_vector.z)
+
 
 class vector(object):
     def __init__(self, x, y, z):
@@ -15,11 +19,11 @@ class vector(object):
         return vector(self.x + other.x, self.y+other.y, self.z+other.z)
     def __sub__(self, other):
         return vector(self.x - other.x, self.y - other.y, self.z - other.z)
-    def __mul__(self, other): #The * operator is dot product
+    def __mul__(self, other):  #The * operator is dot product
         return self.dot(other)
     def dot(self, other):
         return self.x*other.x + self.y*other.y+self.z*other.z
-    def __pow__(self, other): #The ** operator allows us to multiply a vector by a scalar
+    def __pow__(self, other):  #The ** operator allows us to multiply a vector by a scalar
         return self.scalar_mult(other)
     def scalar_mult(self, other):
         return vector(self.x * other, self.y*other, self.z*other)
@@ -28,12 +32,12 @@ class vector(object):
         y = -(self.x * other.z - other.x * self.z)
         z = self.x * other.y - other.x * self.y
         return vector(x,y,z)
-    def __mod__(self, other): #The % operator is cross product
+    def __mod__(self, other):  #The % operator is cross product
         return self.cross(other)
-    def norm(self): #Length of self
+    def norm(self):  #Length of self
         return math.sqrt(self.dot(self))
     def distance(self, other):
-        return (self-other).norm() #Find difference and then the length of it
+        return (self-other).norm()  #Find difference and then the length of it
     def unit_vector(self):
         magnitude = self.norm()
         return vector(self.x/magnitude, self.y/magnitude, self.z/magnitude)
@@ -46,12 +50,13 @@ class vector(object):
     def yaw(self):
         return math.atan(self.x/self.z)
 
+
 class segment(object):
     def __init__(self, point1, point2):
         self.point1 = point1
         self.point2 = point2
-    #shortest distance code based off of http://geomalgorithms.com/a07-_distance.html
-    def min_distance_infinite(self, other):#return shortest distance between two lines
+    #Shortest distance code based off of http://geomalgorithms.com/a07-_distance.html
+    def min_distance_infinite(self, other):  #Return shortest distance between two lines
         u = self.point2 - self.point1
         v = other.point2 - other.point1
         w = self.point1 - other.point1
@@ -75,11 +80,11 @@ class segment(object):
             tc = (a * e - b * d) / D
         dP = w + u**sc - v**tc
         return dP.norm()
-    def min_distance_finite(self, other):#return shortest distance between two segments
+    def min_distance_finite(self, other):  #Return shortest distance between two segments
         u = self.point2 - self.point1
         v = other.point2 - other.point1
         w = self.point1 - other.point1
-        a = u * u #* here is cross product
+        a = u * u  #* here is cross product
         b = u * v
         c = v * v
         d = u * w
@@ -134,8 +139,9 @@ class segment(object):
             tc = 0.0
         else:
             tc = tN / tD
-        dP = w + u**sc - v**tc #I'm pretty sure dP is the actual vector linking the lines
+        dP = w + u**sc - v**tc  #I'm pretty sure dP is the actual vector linking the lines
         return dP.norm()
+
 
 class line(segment):
     def __init__(self, point1, direction_vector):
@@ -146,7 +152,7 @@ class line(segment):
 
 def angle_between_vectors(vector1, vector2):
     #cos(theta)=dot product / (|a|*|b|)
-    top = vector1 * vector2 #* is dot product
+    top = vector1 * vector2  #* is dot product
     bottom = vector1.norm() * vector2.norm()
     angle = math.acos(top/bottom)
-    return angle #In radians
+    return angle  #In radians
