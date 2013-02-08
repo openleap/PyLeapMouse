@@ -10,7 +10,7 @@ import sys
 
 def main():
     print "Use --finger (or no options) for pointer finger control,\nand --palm for palm control.\nRead README.md for more info."
-    cursor = Mouse.cursor()#Create a cursor object, which controls the cursor position, clicking, etc
+    cursor = Mouse.absolute_cursor()#Create a cursor object, which controls the cursor position, clicking, etc
 
     listener = None; #I'm tired and can't think of a way to organize this segment nicely
 
