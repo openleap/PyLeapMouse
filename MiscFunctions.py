@@ -3,9 +3,13 @@
 #This file contains miscellaneous functions that are not interface-specific
 
 
-import Leap
-import Geometry
 import math
+import sys
+if sys.platform == "darwin":
+    import OSX.Leap as Leap
+else:
+    import Windows.Leap as Leap
+import Geometry
 
 
 class debouncer(object):  #Takes a binary "signal" and debounces it.

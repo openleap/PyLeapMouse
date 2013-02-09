@@ -3,8 +3,12 @@
 
 
 import sys
-import Leap  #Official Leap Library
-import Mouse  #OS-Specific mouse control functions
+if sys.platform == "darwin":
+    import OSX.Leap as Leap
+    import OSX.Mouse as Mouse
+else:
+    import Windows.Leap as Leap
+    import Windows.Mouse as Mouse
 from PalmControl import Palm_Control_Listener  #For palm-tilt based control
 from FingerControl import Finger_Control_Listener  #For finger-pointing control
 

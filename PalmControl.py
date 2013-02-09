@@ -4,7 +4,11 @@
 
 
 import math
-import Leap
+import sys
+if sys.platform == "darwin":
+    import OSX.Leap as Leap
+else:
+    import Windows.Leap as Leap
 import Geometry
 from MiscFunctions import *
 
