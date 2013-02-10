@@ -39,20 +39,20 @@ class vector(object):
     def __mod__(self, other):  #The % operator is cross product
         return self.cross(other)
     def norm(self):  #Length of self
-        return math.sqrt(self.dot(self))
+        return math.sqrt(1.0*self.dot(self))
     def distance(self, other):
         return (self-other).norm()  #Find difference and then the length of it
     def unit_vector(self):
         magnitude = self.norm()
-        return vector(self.x/magnitude, self.y/magnitude, self.z/magnitude)
+        return vector(1.0*self.x/magnitude, 1.0*self.y/magnitude, 1.0*self.z/magnitude)
     def to_leap(self):
         return Leap.Vector(self.x, self.y, self.z)
     def pitch(self):
-        return math.atan(self.z/self.y)
+        return math.atan(1.0*self.z/self.y)
     def roll(self):
-        return math.atan(self.x/self.y)
+        return math.atan(1.0*self.x/self.y)
     def yaw(self):
-        return math.atan(self.x/self.z)
+        return math.atan(1.0*self.x/self.z)
 
 
 class segment(object):
