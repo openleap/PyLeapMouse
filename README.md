@@ -1,6 +1,6 @@
-This is my Proof-of-concept code for a Leap Motion-based mouse controller. It now works with both OS X and Windows.
+This is wyager's Proof-of-concept code for a Leap Motion-based mouse controller. It now works with both OS X and Windows.
 
-The most recent version is on Github at github.com/wyager/pyleapmouse.
+The most recent version is on Github at github.com/openleap/pyleapmouse.
 
 CONFIGURATION:
 1)Launch the Leap app (if not launched already) and plug in your Leap  
