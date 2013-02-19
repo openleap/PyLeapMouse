@@ -1,7 +1,6 @@
 *.py[cod]
 *.egg
 *.egg-info
-.DS_Store
 dist
 build
 eggs
