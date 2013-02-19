@@ -2,6 +2,7 @@
 *.egg
 *.egg-info
 .DS_Store
+.gitignore~
 dist
 build
 eggs
