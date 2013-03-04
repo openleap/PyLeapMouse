@@ -11,6 +11,10 @@
 #files
 Leap.py
 
+
+#directories
+.idea
+
 #other
 dist
 build
