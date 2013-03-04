@@ -1,8 +1,17 @@
+#extentions
+*.dll
+*.pyd
 *.py[cod]
 *.egg
 *.egg-info
 .DS_Store
 .gitignore~
+.gitignore
+
+#files
+Leap.py
+
+#other
 dist
 build
 eggs
