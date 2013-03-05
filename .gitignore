@@ -4,6 +4,8 @@
 *.py[cod]
 *.egg
 *.egg-info
+*.wpr
+*.wpu
 .DS_Store
 .gitignore~
 .gitignore
