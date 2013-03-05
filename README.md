@@ -42,3 +42,7 @@ TODO:
 Automatic library import for x86/x86_64 (libraries already import for proper OS automatically).  
 Add proper relative mouse movement. Should be pretty easy on Windows, not sure how to do so on OS X.  
 Add multiple monitor support for absolute mouse mode (and OS X's pseudo-relative mode).  
+
+_____________________________________________________________________________________________
+Please add necessary files like Leap.py and .dlls in Windows folder for working.
+They are removed in accordance to the Leap Agreement.
