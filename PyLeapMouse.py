@@ -15,19 +15,18 @@ from FingerControl import Finger_Control_Listener  #For finger-pointing control
 
 def main():
     print "Use --finger (or no options) for pointer finger control,\nand --palm for palm control.\nRead README.md for more info."
-    cursor = Mouse.absolute_cursor()  #Create a cursor object, which controls the cursor position, clicking, etc
 
     listener = None;  #I'm tired and can't think of a way to organize this segment nicely
 
-    #Create a custom listener object which controls the cursor
+    #Create a custom listener object which controls the mouse
     if len(sys.argv) == 1:  #Finger pointer mode
-        listener = Finger_Control_Listener(cursor)
+        listener = Finger_Control_Listener(Mouse)
         print "Using finger mode..."
     elif sys.argv[1].lower() == "--finger":  #Also finger control mode
-        listener = Finger_Control_Listener(cursor)
+        listener = Finger_Control_Listener(Mouse)
         print "Using finger mode..."
     elif sys.argv[1].lower() == "--palm":  #Palm control mode
-        listener = Palm_Control_Listener(cursor)
+        listener = Palm_Control_Listener(Mouse)
         print "Using palm mode..."
     else:
         print "Error parsing input options"

@@ -14,20 +14,13 @@ from MiscFunctions import *
 
 
 class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the controller. This listener is for palm tilt movement
-    def __init__(self, cursor):
+    def __init__(self, mouse):
         super(Palm_Control_Listener, self).__init__()  #Initialize like a normal listener
         #Initialize a bunch of stuff specific to this implementation
-        self.screen = None
-        self.screen_resolution = (0,0)
-        self.cursor = cursor  #The cursor object that lets us control mice cross-platform
+        self.cursor = mouse.relative_cursor()  #The cursor object that lets us control mice cross-platform
         self.gesture_debouncer = n_state_debouncer(5,3)  #A signal debouncer that ensures a reliable, non-jumpy gesture detection
 
     def on_init(self, controller):
-        if controller.calibrated_screens.empty:
-            print "Calibrate your Leap screen feature"
-        self.screen = controller.calibrated_screens[0]
-        self.screen_resolution = (self.screen.width_pixels, self.screen.height_pixels)
-
         print "Initialized"
 
     def on_connect(self, controller):
@@ -56,7 +49,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
          roll = hand_normal_direction.roll()
          pitch = hand_normal_direction.pitch()
          mouse_velocity = self.convert_angles_to_mouse_velocity(roll, pitch)
-         self.cursor.move(self.cursor.x + mouse_velocity[0], self.cursor.y + mouse_velocity[1])
+         self.cursor.move(mouse_velocity[0], mouse_velocity[1])
 
     #The gesture hand signals what action to do,
     #The mouse hand gives extra data (if applicable)
