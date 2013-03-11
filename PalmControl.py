@@ -21,7 +21,6 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
         self.screen_resolution = (0,0)
         self.cursor = cursor  #The cursor object that lets us control mice cross-platform
         self.gesture_debouncer = n_state_debouncer(5,3)  #A signal debouncer that ensures a reliable, non-jumpy gesture detection
-        self.mouse_manager = mouse_manager()  #This allows for cleaner mouse movement
 
     def on_init(self, controller):
         if controller.calibrated_screens.empty:
@@ -57,8 +56,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
          roll = hand_normal_direction.roll()
          pitch = hand_normal_direction.pitch()
          mouse_velocity = self.convert_angles_to_mouse_velocity(roll, pitch)
-         movement = self.mouse_manager.add(mouse_velocity)
-         self.cursor.move(self.cursor.x + movement[0], self.cursor.y + movement[1])
+         self.cursor.move(self.cursor.x + mouse_velocity[0], self.cursor.y + mouse_velocity[1])
 
     #The gesture hand signals what action to do,
     #The mouse hand gives extra data (if applicable)

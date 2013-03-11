@@ -11,6 +11,30 @@ else:
     import Windows.Leap as Leap
 import Geometry
 
+#Smooths the mouse's position
+class mouse_position_smoother(object): 
+    def __init__(self, smooth_aggressiveness=8, smooth_falloff=1.3):
+        self.previous_positions = []
+        self.smooth_falloff = smooth_falloff
+        self.smooth_aggressiveness = smooth_aggressiveness
+    def update(self, (x,y)):
+        self.previous_positions.append((x,y))
+        if len(self.previous_positions) > self.smooth_aggressiveness:
+            del self.previous_positions[0]
+        return self.get_current_smooth_value()
+    def get_current_smooth_value(self):
+        smooth_x = 0
+        smooth_y = 0
+        total_weight = 0
+        num_positions = len(self.previous_positions)
+        for position in range(0, num_positions):
+            weight = 1 / (self.smooth_falloff ** (num_positions - position))
+            total_weight += weight
+            smooth_x += self.previous_positions[position][0] * weight
+            smooth_y += self.previous_positions[position][1] * weight
+        smooth_x /= total_weight
+        smooth_y /= total_weight
+        return smooth_x, smooth_y
 
 class debouncer(object):  #Takes a binary "signal" and debounces it.
     def __init__(self, debounce_time):  #Takes as an argument the number of opposite samples it needs to debounce.
@@ -55,24 +79,6 @@ class n_state_debouncer(object):  #A signal debouncer that has `number_of_states
                     if x is not i: self.state_counters[x] = 0  #Zero out all other state counters
                 self.state = i  #Save the new state
         return self.state
-
-
-class mouse_manager(object):  #The original intent of this object was to allow for smoother mouse movements. However, I hope to eliminate it soon.
-    def __init__(self):
-        self.xcounter = 0.0
-        self.ycounter = 0.0
-
-    #Returns the integer part of the mouse movement, stores the leftover float part for later
-    def add(self, (x, y)):
-        self.xcounter = self.xcounter + x
-        self.ycounter = self.ycounter + y
-        split_x = math.modf(self.xcounter)  #Saves the float part (remainder) into the counter
-        split_y = math.modf(self.ycounter)  #And the int part into the movement
-        self.xcounter = split_x[0]
-        xmovement = int(split_x[1])
-        self.ycounter = split_y[0]
-        ymovement = int(split_y[1])
-        return xmovement, ymovement  
 
 
 def sort_fingers_by_distance_from_screen(fingers):
