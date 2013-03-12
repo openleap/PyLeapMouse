@@ -1,6 +1,6 @@
 *.egg
 *.egg-info
-*.py[cod]
+*.py[co]
 *.pyc
 .cleanup.sh
 .DS_Store
