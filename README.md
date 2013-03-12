@@ -5,8 +5,8 @@ The most recent version is on Github at github.com/openleap/pyleapmouse.
 CONFIGURATION:  
 1)Launch the Leap app (if not launched already) and plug in your Leap  
 2)If you have not done so already, Configure your Leap screen from the Leap menu.  
-3)`cd` to the directory all this stuff is in and run `python PyLeapMouse.py` (minus quotes) or just double-click PyLeapMouse.py if you have your computer configured to launch .py files.  
-4)If your OS or Python 2.7 installation (i.e. x86 vs x86_64) is not compatible with the Leap Library files included in OSX/ or Windows/, you may need to copy the library files from your Leap SDK folder into your OSX or Windows folder.  
+3)WINDOWS USERS: You must copy all required library files (.libs and .dlls) from your Leap SDK folder to the "Windows" folder. These files are already included for OS X users, because OS X is 64-bit only.  
+4)`cd` to the directory all this stuff is in and run `python PyLeapMouse.py` (minus quotes) or just double-click PyLeapMouse.py if you have your computer configured to launch .py files.   
 5)Launch with the --palm argument to run in palm mode (with much more accurate two-handed control).  
 
 USAGE WITH FINGER MODE (python PyLeapMouse.py --finger) (default):  
