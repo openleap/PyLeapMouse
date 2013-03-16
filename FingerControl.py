@@ -14,13 +14,13 @@ from MiscFunctions import *
 
 
 class Finger_Control_Listener(Leap.Listener):  #The Listener that we attach to the controller. This listener is for pointer finger movement
-    def __init__(self, mouse):
+    def __init__(self, mouse, smooth_aggressiveness=8, smooth_falloff=1.3):
         super(Finger_Control_Listener, self).__init__()  #Initialize like a normal listener
         #Initialize a bunch of stuff specific to this implementation
         self.screen = None
         self.screen_resolution = (0,0)
         self.cursor = mouse.absolute_cursor()  #The cursor object that lets us control mice cross-platform
-        self.mouse_position_smoother = mouse_position_smoother() #Keeps the cursor from fidgeting
+        self.mouse_position_smoother = mouse_position_smoother(smooth_aggressiveness, smooth_falloff) #Keeps the cursor from fidgeting
         self.mouse_button_debouncer = debouncer(5)  #A signal debouncer that ensures a reliable, non-jumpy click
         self.most_recent_pointer_finger_id = None  #This holds the ID of the most recently used pointing finger, to prevent annoying switching
 

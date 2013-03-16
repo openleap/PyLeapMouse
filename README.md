@@ -25,6 +25,7 @@ Two hands in frame: Left hand controls action.
     Two fingers open: Scrolling. Scrolling with right hand movement.  
 This is a somewhat unintuitive method of operation, but I find that it gives exceptionally better control than the most obvious "point-at-screen" method of mouse control. With this two-handed tilt based mode, it is easy to hit and properly engage small buttons, scroll through webpages, etc.  
 
+
 NOTES:  
 This is a spare-time project, so it's not perfect quality. However, I tried to keep the code clean and readable. Let me know if you find any bugs (which there are certainly at least a few of). You can reach me at  will (dot) yager (at) gmail (dot) (what the gmail domain ends in).  
 The contents of the files are as follows:  
@@ -36,9 +37,15 @@ OSX/Windows:
     Mouse.py: A set of generic commands and classes to abstract away from OS-Specific mouse commands  
 Geometry.py: Geometric functions  
 MiscFunctions.py: Things that aren't strictly geometry and aren't specific to any interface style  
-README.md: You are here
+README.md: You are here  
+
+ADVANCED OPTIONS:  
+`--smooth-aggressiveness [value]` sets the number of samples to use for pointer finger mouse smoothing.  
+`--smooth-falloff [value]` sets the rate at which previous samples lose importance.  
+For every sample back in time, the previous location of the mouse is weighted with weight smooth_falloff^(-#sample).  
+So if smooth_falloff = 1.2, the current frame has weight 1/(1.2^0)=1, but the frame from 5 frames ago has weight 1/(1.2^5) = .4  
+By default, the smooth aggressiveness is 8 frames with a falloff of 1.3.  
 
 TODO:  
-Automatic library import for x86/x86_64 (libraries already import for proper OS automatically).  
 Add proper relative mouse movement. Should be pretty easy on Windows, not sure how to do so on OS X.  
 Add multiple monitor support for absolute mouse mode (and OS X's pseudo-relative mode).  

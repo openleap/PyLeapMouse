@@ -13,10 +13,15 @@ import Geometry
 
 #Smooths the mouse's position
 class mouse_position_smoother(object): 
-    def __init__(self, smooth_aggressiveness=8, smooth_falloff=1.3):
+    def __init__(self, smooth_aggressiveness, smooth_falloff):
+        #Input validation
+        if smooth_aggressiveness < 1:
+            raise Exception("Smooth aggressiveness must be greater than 1.")
+        if smooth_falloff < 1:
+            raise Exception("Smooth falloff must be greater than 1.0.")
         self.previous_positions = []
         self.smooth_falloff = smooth_falloff
-        self.smooth_aggressiveness = smooth_aggressiveness
+        self.smooth_aggressiveness = int(smooth_aggressiveness)
     def update(self, (x,y)):
         self.previous_positions.append((x,y))
         if len(self.previous_positions) > self.smooth_aggressiveness:
