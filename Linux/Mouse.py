@@ -10,10 +10,12 @@ def AbsoluteMouseClick(posx,posy):
     mouse.click(posx, posy)
 
 def AbsoluteMouseClickDown(posx, posy):
-    pass
+    print 'left button down'
+    mouse.press(posx, posy)
 
 def AbsoluteMouseClickUp(posx, posy):
-    pass
+    print 'left button up'
+    mouse.release(posx, posy)
 
 def AbsoluteMouseDrag(posx, posy):  #Only relevant in OS X(?)
     mouse.move(posx, posy)
