@@ -23,8 +23,13 @@ def AbsoluteMouseDrag(posx, posy):  #Only relevant in OS X(?)
 def AbsoluteMouseRightClick(posx,posy):
     mouse.click(posx, posy, button=2)
 
-def RelativeMouseScroll(x_movement, y_movement):  #Movements should be no larger than +- 10
-    mouse.click(x_movement, y_movement, button=3)
+def AbsoluteMouseScroll(posx, posy, up=True):  #PyUserInput doesn't appear to support relative scrolling
+    if up is True:
+        mouse.click(posx, posy, button=4)
+    elif up is False:
+        mouse.click(posx, posy, button=5)
+    #When PyUserInput > 0.1.5 is released, the following will work:
+    #mouse.scroll(posx, posy, up)
 
 def GetDisplayWidth():
     return mouse.screen_size()[0]
@@ -95,7 +100,12 @@ class absolute_cursor(object):
         AbsoluteMouseRightClick(posx, posy)
 
     def scroll(self, x_movement, y_movement):
-        RelativeMouseScroll(x_movement, y_movement)
+        posx = self.x
+        posy = self.y
+        up = False
+        if y_movement < 0:
+            up = True
+        AbsoluteMouseScroll(posx, posy, up)
 
 
 #Allows for relative movement instead of absolute movement. This implementation is not a "true" relative mouse,
