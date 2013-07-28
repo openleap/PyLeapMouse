@@ -4,15 +4,11 @@
 
 
 import math
-import sys
-if sys.platform == "darwin":
-    import OSX.Leap as Leap
-else:
-    import Windows.Leap as Leap
+from leap import Leap
 import Geometry
 
 #Smooths the mouse's position
-class mouse_position_smoother(object): 
+class mouse_position_smoother(object):
     def __init__(self, smooth_aggressiveness, smooth_falloff):
         #Input validation
         if smooth_aggressiveness < 1:
@@ -80,7 +76,7 @@ class n_state_debouncer(object):  #A signal debouncer that has `number_of_states
             if self.state_counters[i] < 0: self.state_counters[i] = 0
             if self.state_counters[i] >= self.debounce_time:  #Confirmed new state at index i
                 self.state_counters[i] = self.debounce_time
-                for x in range(0,len(self.state_counters)): 
+                for x in range(0,len(self.state_counters)):
                     if x is not i: self.state_counters[x] = 0  #Zero out all other state counters
                 self.state = i  #Save the new state
         return self.state

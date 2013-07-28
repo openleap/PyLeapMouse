@@ -4,11 +4,7 @@
 
 
 import math
-import sys
-if sys.platform == "darwin":
-    import OSX.Leap as Leap
-else:
-    import Windows.Leap as Leap
+from leap import Leap, Mouse
 import Geometry
 from MiscFunctions import *
 
@@ -42,7 +38,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
                 rightmost_hand = max(frame.hands, key=lambda hand: hand.palm_position.x)  #Get rightmost hand
                 leftmost_hand = min(frame.hands, key=lambda hand: hand.palm_position.x)  #Get leftmost hand
                 self.do_gesture_recognition(leftmost_hand, rightmost_hand)  #This will run with >1 hands in frame
-                                  
+
     def do_mouse_stuff(self, hand):  #Take a hand and use it as a mouse
          hand_normal_direction = Geometry.to_vector(hand.palm_normal)
          hand_direction = Geometry.to_vector(hand.direction)
@@ -58,7 +54,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
         if len(gesture_hand.fingers) == 2:  #Two open fingers on gesture hand (scroll mode)
             self.gesture_debouncer.signal(2)  #Tell the debouncer we've seen this gesture
         elif len(gesture_hand.fingers) == 1:  #One open finger on gesture hand (click down)
-            self.gesture_debouncer.signal(1) 
+            self.gesture_debouncer.signal(1)
         else:  #No open fingers or 3+ open fingers (click up/no action)
             self.gesture_debouncer.signal(0)
         #Now that we've told the debouncer what we *think* the current gesture is, we must act
@@ -72,7 +68,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
             self.do_mouse_stuff(mouse_hand)  #We may want to click and drag
         elif self.gesture_debouncer.state == 0:  #Move cursor mode
             if self.cursor.left_button_pressed: self.cursor.click_up()  #Click up (if needed)
-            self.do_mouse_stuff(mouse_hand)   
+            self.do_mouse_stuff(mouse_hand)
 
     def velocity_to_scroll_amount(self, velocity):  #Converts a finger velocity to a scroll velocity
         #The following algorithm was designed to reflect what I think is a comfortable
