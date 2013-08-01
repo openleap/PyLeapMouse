@@ -4,31 +4,19 @@
 
 
 import math
-import sys
-if sys.platform == "darwin":
-    import OSX.Leap as Leap
-else:
-    import Windows.Leap as Leap
+from leap import Leap, Mouse
 import Geometry
 from MiscFunctions import *
 
 
 class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the controller. This listener is for palm tilt movement
-    def __init__(self, cursor):
+    def __init__(self, mouse):
         super(Palm_Control_Listener, self).__init__()  #Initialize like a normal listener
         #Initialize a bunch of stuff specific to this implementation
-        self.screen = None
-        self.screen_resolution = (0,0)
-        self.cursor = cursor  #The cursor object that lets us control mice cross-platform
+        self.cursor = mouse.relative_cursor()  #The cursor object that lets us control mice cross-platform
         self.gesture_debouncer = n_state_debouncer(5,3)  #A signal debouncer that ensures a reliable, non-jumpy gesture detection
-        self.mouse_manager = mouse_manager()  #This allows for cleaner mouse movement
 
     def on_init(self, controller):
-        if controller.calibrated_screens.empty:
-            print "Calibrate your Leap screen feature"
-        self.screen = controller.calibrated_screens[0]
-        self.screen_resolution = (self.screen.width_pixels, self.screen.height_pixels)
-
         print "Initialized"
 
     def on_connect(self, controller):
@@ -50,15 +38,14 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
                 rightmost_hand = max(frame.hands, key=lambda hand: hand.palm_position.x)  #Get rightmost hand
                 leftmost_hand = min(frame.hands, key=lambda hand: hand.palm_position.x)  #Get leftmost hand
                 self.do_gesture_recognition(leftmost_hand, rightmost_hand)  #This will run with >1 hands in frame
-                                  
+
     def do_mouse_stuff(self, hand):  #Take a hand and use it as a mouse
          hand_normal_direction = Geometry.to_vector(hand.palm_normal)
          hand_direction = Geometry.to_vector(hand.direction)
          roll = hand_normal_direction.roll()
          pitch = hand_normal_direction.pitch()
          mouse_velocity = self.convert_angles_to_mouse_velocity(roll, pitch)
-         movement = self.mouse_manager.add(mouse_velocity)
-         self.cursor.move(self.cursor.x + movement[0], self.cursor.y + movement[1])
+         self.cursor.move(mouse_velocity[0], mouse_velocity[1])
 
     #The gesture hand signals what action to do,
     #The mouse hand gives extra data (if applicable)
@@ -67,7 +54,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
         if len(gesture_hand.fingers) == 2:  #Two open fingers on gesture hand (scroll mode)
             self.gesture_debouncer.signal(2)  #Tell the debouncer we've seen this gesture
         elif len(gesture_hand.fingers) == 1:  #One open finger on gesture hand (click down)
-            self.gesture_debouncer.signal(1) 
+            self.gesture_debouncer.signal(1)
         else:  #No open fingers or 3+ open fingers (click up/no action)
             self.gesture_debouncer.signal(0)
         #Now that we've told the debouncer what we *think* the current gesture is, we must act
@@ -81,7 +68,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
             self.do_mouse_stuff(mouse_hand)  #We may want to click and drag
         elif self.gesture_debouncer.state == 0:  #Move cursor mode
             if self.cursor.left_button_pressed: self.cursor.click_up()  #Click up (if needed)
-            self.do_mouse_stuff(mouse_hand)   
+            self.do_mouse_stuff(mouse_hand)
 
     def velocity_to_scroll_amount(self, velocity):  #Converts a finger velocity to a scroll velocity
         #The following algorithm was designed to reflect what I think is a comfortable

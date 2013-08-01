@@ -4,22 +4,18 @@
 
 
 import math
-import sys
-if sys.platform == "darwin":
-    import OSX.Leap as Leap
-else:
-    import Windows.Leap as Leap
-import Geometry
+from leap import Leap, Mouse
 from MiscFunctions import *
 
 
 class Finger_Control_Listener(Leap.Listener):  #The Listener that we attach to the controller. This listener is for pointer finger movement
-    def __init__(self, cursor):
+    def __init__(self, mouse, smooth_aggressiveness=8, smooth_falloff=1.3):
         super(Finger_Control_Listener, self).__init__()  #Initialize like a normal listener
         #Initialize a bunch of stuff specific to this implementation
         self.screen = None
         self.screen_resolution = (0,0)
-        self.cursor = cursor  #The cursor object that lets us control mice cross-platform
+        self.cursor = mouse.absolute_cursor()  #The cursor object that lets us control mice cross-platform
+        self.mouse_position_smoother = mouse_position_smoother(smooth_aggressiveness, smooth_falloff) #Keeps the cursor from fidgeting
         self.mouse_button_debouncer = debouncer(5)  #A signal debouncer that ensures a reliable, non-jumpy click
         self.most_recent_pointer_finger_id = None  #This holds the ID of the most recently used pointing finger, to prevent annoying switching
 
@@ -77,6 +73,7 @@ class Finger_Control_Listener(Leap.Listener):  #The Listener that we attach to t
             if not math.isnan(intersection.x) and not math.isnan(intersection.y):  #If the finger intersects with the screen
                 x_coord = intersection.x * self.screen_resolution[0]  #x pixel of intersection
                 y_coord = (1.0 - intersection.y) * self.screen_resolution[1]  #y pixel of intersection
+                x_coord,y_coord = self.mouse_position_smoother.update((x_coord,y_coord)) #Smooth movement
                 self.cursor.move(x_coord,y_coord)  #Move the cursor
                 if has_thumb(hand):  #We've found a thumb!
                     self.mouse_button_debouncer.signal(True)  #We have detected a possible click. The debouncer ensures that we don't have click jitter

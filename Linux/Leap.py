@@ -103,288 +103,6 @@ class SwigPyIterator(_object):
 SwigPyIterator_swigregister = LeapPython.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
-class BoolArray(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, BoolArray, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, BoolArray, name)
-    __repr__ = _swig_repr
-    def iterator(self): return LeapPython.BoolArray_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return LeapPython.BoolArray___nonzero__(self)
-    def __bool__(self): return LeapPython.BoolArray___bool__(self)
-    def __len__(self): return LeapPython.BoolArray___len__(self)
-    def pop(self): return LeapPython.BoolArray_pop(self)
-    def __getslice__(self, *args): return LeapPython.BoolArray___getslice__(self, *args)
-    def __setslice__(self, *args): return LeapPython.BoolArray___setslice__(self, *args)
-    def __delslice__(self, *args): return LeapPython.BoolArray___delslice__(self, *args)
-    def __delitem__(self, *args): return LeapPython.BoolArray___delitem__(self, *args)
-    def __getitem__(self, *args): return LeapPython.BoolArray___getitem__(self, *args)
-    def __setitem__(self, *args): return LeapPython.BoolArray___setitem__(self, *args)
-    def append(self, *args): return LeapPython.BoolArray_append(self, *args)
-    def empty(self): return LeapPython.BoolArray_empty(self)
-    def size(self): return LeapPython.BoolArray_size(self)
-    def clear(self): return LeapPython.BoolArray_clear(self)
-    def swap(self, *args): return LeapPython.BoolArray_swap(self, *args)
-    def get_allocator(self): return LeapPython.BoolArray_get_allocator(self)
-    def begin(self): return LeapPython.BoolArray_begin(self)
-    def end(self): return LeapPython.BoolArray_end(self)
-    def rbegin(self): return LeapPython.BoolArray_rbegin(self)
-    def rend(self): return LeapPython.BoolArray_rend(self)
-    def pop_back(self): return LeapPython.BoolArray_pop_back(self)
-    def erase(self, *args): return LeapPython.BoolArray_erase(self, *args)
-    def __init__(self, *args): 
-        this = LeapPython.new_BoolArray(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def push_back(self, *args): return LeapPython.BoolArray_push_back(self, *args)
-    def front(self): return LeapPython.BoolArray_front(self)
-    def back(self): return LeapPython.BoolArray_back(self)
-    def assign(self, *args): return LeapPython.BoolArray_assign(self, *args)
-    def resize(self, *args): return LeapPython.BoolArray_resize(self, *args)
-    def insert(self, *args): return LeapPython.BoolArray_insert(self, *args)
-    def reserve(self, *args): return LeapPython.BoolArray_reserve(self, *args)
-    def capacity(self): return LeapPython.BoolArray_capacity(self)
-    __swig_destroy__ = LeapPython.delete_BoolArray
-    __del__ = lambda self : None;
-BoolArray_swigregister = LeapPython.BoolArray_swigregister
-BoolArray_swigregister(BoolArray)
-
-class Int32Array(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Int32Array, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Int32Array, name)
-    __repr__ = _swig_repr
-    def iterator(self): return LeapPython.Int32Array_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return LeapPython.Int32Array___nonzero__(self)
-    def __bool__(self): return LeapPython.Int32Array___bool__(self)
-    def __len__(self): return LeapPython.Int32Array___len__(self)
-    def pop(self): return LeapPython.Int32Array_pop(self)
-    def __getslice__(self, *args): return LeapPython.Int32Array___getslice__(self, *args)
-    def __setslice__(self, *args): return LeapPython.Int32Array___setslice__(self, *args)
-    def __delslice__(self, *args): return LeapPython.Int32Array___delslice__(self, *args)
-    def __delitem__(self, *args): return LeapPython.Int32Array___delitem__(self, *args)
-    def __getitem__(self, *args): return LeapPython.Int32Array___getitem__(self, *args)
-    def __setitem__(self, *args): return LeapPython.Int32Array___setitem__(self, *args)
-    def append(self, *args): return LeapPython.Int32Array_append(self, *args)
-    def empty(self): return LeapPython.Int32Array_empty(self)
-    def size(self): return LeapPython.Int32Array_size(self)
-    def clear(self): return LeapPython.Int32Array_clear(self)
-    def swap(self, *args): return LeapPython.Int32Array_swap(self, *args)
-    def get_allocator(self): return LeapPython.Int32Array_get_allocator(self)
-    def begin(self): return LeapPython.Int32Array_begin(self)
-    def end(self): return LeapPython.Int32Array_end(self)
-    def rbegin(self): return LeapPython.Int32Array_rbegin(self)
-    def rend(self): return LeapPython.Int32Array_rend(self)
-    def pop_back(self): return LeapPython.Int32Array_pop_back(self)
-    def erase(self, *args): return LeapPython.Int32Array_erase(self, *args)
-    def __init__(self, *args): 
-        this = LeapPython.new_Int32Array(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def push_back(self, *args): return LeapPython.Int32Array_push_back(self, *args)
-    def front(self): return LeapPython.Int32Array_front(self)
-    def back(self): return LeapPython.Int32Array_back(self)
-    def assign(self, *args): return LeapPython.Int32Array_assign(self, *args)
-    def resize(self, *args): return LeapPython.Int32Array_resize(self, *args)
-    def insert(self, *args): return LeapPython.Int32Array_insert(self, *args)
-    def reserve(self, *args): return LeapPython.Int32Array_reserve(self, *args)
-    def capacity(self): return LeapPython.Int32Array_capacity(self)
-    __swig_destroy__ = LeapPython.delete_Int32Array
-    __del__ = lambda self : None;
-Int32Array_swigregister = LeapPython.Int32Array_swigregister
-Int32Array_swigregister(Int32Array)
-
-class UInt32Array(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, UInt32Array, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, UInt32Array, name)
-    __repr__ = _swig_repr
-    def iterator(self): return LeapPython.UInt32Array_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return LeapPython.UInt32Array___nonzero__(self)
-    def __bool__(self): return LeapPython.UInt32Array___bool__(self)
-    def __len__(self): return LeapPython.UInt32Array___len__(self)
-    def pop(self): return LeapPython.UInt32Array_pop(self)
-    def __getslice__(self, *args): return LeapPython.UInt32Array___getslice__(self, *args)
-    def __setslice__(self, *args): return LeapPython.UInt32Array___setslice__(self, *args)
-    def __delslice__(self, *args): return LeapPython.UInt32Array___delslice__(self, *args)
-    def __delitem__(self, *args): return LeapPython.UInt32Array___delitem__(self, *args)
-    def __getitem__(self, *args): return LeapPython.UInt32Array___getitem__(self, *args)
-    def __setitem__(self, *args): return LeapPython.UInt32Array___setitem__(self, *args)
-    def append(self, *args): return LeapPython.UInt32Array_append(self, *args)
-    def empty(self): return LeapPython.UInt32Array_empty(self)
-    def size(self): return LeapPython.UInt32Array_size(self)
-    def clear(self): return LeapPython.UInt32Array_clear(self)
-    def swap(self, *args): return LeapPython.UInt32Array_swap(self, *args)
-    def get_allocator(self): return LeapPython.UInt32Array_get_allocator(self)
-    def begin(self): return LeapPython.UInt32Array_begin(self)
-    def end(self): return LeapPython.UInt32Array_end(self)
-    def rbegin(self): return LeapPython.UInt32Array_rbegin(self)
-    def rend(self): return LeapPython.UInt32Array_rend(self)
-    def pop_back(self): return LeapPython.UInt32Array_pop_back(self)
-    def erase(self, *args): return LeapPython.UInt32Array_erase(self, *args)
-    def __init__(self, *args): 
-        this = LeapPython.new_UInt32Array(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def push_back(self, *args): return LeapPython.UInt32Array_push_back(self, *args)
-    def front(self): return LeapPython.UInt32Array_front(self)
-    def back(self): return LeapPython.UInt32Array_back(self)
-    def assign(self, *args): return LeapPython.UInt32Array_assign(self, *args)
-    def resize(self, *args): return LeapPython.UInt32Array_resize(self, *args)
-    def insert(self, *args): return LeapPython.UInt32Array_insert(self, *args)
-    def reserve(self, *args): return LeapPython.UInt32Array_reserve(self, *args)
-    def capacity(self): return LeapPython.UInt32Array_capacity(self)
-    __swig_destroy__ = LeapPython.delete_UInt32Array
-    __del__ = lambda self : None;
-UInt32Array_swigregister = LeapPython.UInt32Array_swigregister
-UInt32Array_swigregister(UInt32Array)
-
-class FloatArray(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, FloatArray, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, FloatArray, name)
-    __repr__ = _swig_repr
-    def iterator(self): return LeapPython.FloatArray_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return LeapPython.FloatArray___nonzero__(self)
-    def __bool__(self): return LeapPython.FloatArray___bool__(self)
-    def __len__(self): return LeapPython.FloatArray___len__(self)
-    def pop(self): return LeapPython.FloatArray_pop(self)
-    def __getslice__(self, *args): return LeapPython.FloatArray___getslice__(self, *args)
-    def __setslice__(self, *args): return LeapPython.FloatArray___setslice__(self, *args)
-    def __delslice__(self, *args): return LeapPython.FloatArray___delslice__(self, *args)
-    def __delitem__(self, *args): return LeapPython.FloatArray___delitem__(self, *args)
-    def __getitem__(self, *args): return LeapPython.FloatArray___getitem__(self, *args)
-    def __setitem__(self, *args): return LeapPython.FloatArray___setitem__(self, *args)
-    def append(self, *args): return LeapPython.FloatArray_append(self, *args)
-    def empty(self): return LeapPython.FloatArray_empty(self)
-    def size(self): return LeapPython.FloatArray_size(self)
-    def clear(self): return LeapPython.FloatArray_clear(self)
-    def swap(self, *args): return LeapPython.FloatArray_swap(self, *args)
-    def get_allocator(self): return LeapPython.FloatArray_get_allocator(self)
-    def begin(self): return LeapPython.FloatArray_begin(self)
-    def end(self): return LeapPython.FloatArray_end(self)
-    def rbegin(self): return LeapPython.FloatArray_rbegin(self)
-    def rend(self): return LeapPython.FloatArray_rend(self)
-    def pop_back(self): return LeapPython.FloatArray_pop_back(self)
-    def erase(self, *args): return LeapPython.FloatArray_erase(self, *args)
-    def __init__(self, *args): 
-        this = LeapPython.new_FloatArray(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def push_back(self, *args): return LeapPython.FloatArray_push_back(self, *args)
-    def front(self): return LeapPython.FloatArray_front(self)
-    def back(self): return LeapPython.FloatArray_back(self)
-    def assign(self, *args): return LeapPython.FloatArray_assign(self, *args)
-    def resize(self, *args): return LeapPython.FloatArray_resize(self, *args)
-    def insert(self, *args): return LeapPython.FloatArray_insert(self, *args)
-    def reserve(self, *args): return LeapPython.FloatArray_reserve(self, *args)
-    def capacity(self): return LeapPython.FloatArray_capacity(self)
-    __swig_destroy__ = LeapPython.delete_FloatArray
-    __del__ = lambda self : None;
-FloatArray_swigregister = LeapPython.FloatArray_swigregister
-FloatArray_swigregister(FloatArray)
-
-class DoubleArray(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, DoubleArray, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, DoubleArray, name)
-    __repr__ = _swig_repr
-    def iterator(self): return LeapPython.DoubleArray_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return LeapPython.DoubleArray___nonzero__(self)
-    def __bool__(self): return LeapPython.DoubleArray___bool__(self)
-    def __len__(self): return LeapPython.DoubleArray___len__(self)
-    def pop(self): return LeapPython.DoubleArray_pop(self)
-    def __getslice__(self, *args): return LeapPython.DoubleArray___getslice__(self, *args)
-    def __setslice__(self, *args): return LeapPython.DoubleArray___setslice__(self, *args)
-    def __delslice__(self, *args): return LeapPython.DoubleArray___delslice__(self, *args)
-    def __delitem__(self, *args): return LeapPython.DoubleArray___delitem__(self, *args)
-    def __getitem__(self, *args): return LeapPython.DoubleArray___getitem__(self, *args)
-    def __setitem__(self, *args): return LeapPython.DoubleArray___setitem__(self, *args)
-    def append(self, *args): return LeapPython.DoubleArray_append(self, *args)
-    def empty(self): return LeapPython.DoubleArray_empty(self)
-    def size(self): return LeapPython.DoubleArray_size(self)
-    def clear(self): return LeapPython.DoubleArray_clear(self)
-    def swap(self, *args): return LeapPython.DoubleArray_swap(self, *args)
-    def get_allocator(self): return LeapPython.DoubleArray_get_allocator(self)
-    def begin(self): return LeapPython.DoubleArray_begin(self)
-    def end(self): return LeapPython.DoubleArray_end(self)
-    def rbegin(self): return LeapPython.DoubleArray_rbegin(self)
-    def rend(self): return LeapPython.DoubleArray_rend(self)
-    def pop_back(self): return LeapPython.DoubleArray_pop_back(self)
-    def erase(self, *args): return LeapPython.DoubleArray_erase(self, *args)
-    def __init__(self, *args): 
-        this = LeapPython.new_DoubleArray(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def push_back(self, *args): return LeapPython.DoubleArray_push_back(self, *args)
-    def front(self): return LeapPython.DoubleArray_front(self)
-    def back(self): return LeapPython.DoubleArray_back(self)
-    def assign(self, *args): return LeapPython.DoubleArray_assign(self, *args)
-    def resize(self, *args): return LeapPython.DoubleArray_resize(self, *args)
-    def insert(self, *args): return LeapPython.DoubleArray_insert(self, *args)
-    def reserve(self, *args): return LeapPython.DoubleArray_reserve(self, *args)
-    def capacity(self): return LeapPython.DoubleArray_capacity(self)
-    __swig_destroy__ = LeapPython.delete_DoubleArray
-    __del__ = lambda self : None;
-DoubleArray_swigregister = LeapPython.DoubleArray_swigregister
-DoubleArray_swigregister(DoubleArray)
-
-class StringArray(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, StringArray, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, StringArray, name)
-    __repr__ = _swig_repr
-    def iterator(self): return LeapPython.StringArray_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return LeapPython.StringArray___nonzero__(self)
-    def __bool__(self): return LeapPython.StringArray___bool__(self)
-    def __len__(self): return LeapPython.StringArray___len__(self)
-    def pop(self): return LeapPython.StringArray_pop(self)
-    def __getslice__(self, *args): return LeapPython.StringArray___getslice__(self, *args)
-    def __setslice__(self, *args): return LeapPython.StringArray___setslice__(self, *args)
-    def __delslice__(self, *args): return LeapPython.StringArray___delslice__(self, *args)
-    def __delitem__(self, *args): return LeapPython.StringArray___delitem__(self, *args)
-    def __getitem__(self, *args): return LeapPython.StringArray___getitem__(self, *args)
-    def __setitem__(self, *args): return LeapPython.StringArray___setitem__(self, *args)
-    def append(self, *args): return LeapPython.StringArray_append(self, *args)
-    def empty(self): return LeapPython.StringArray_empty(self)
-    def size(self): return LeapPython.StringArray_size(self)
-    def clear(self): return LeapPython.StringArray_clear(self)
-    def swap(self, *args): return LeapPython.StringArray_swap(self, *args)
-    def get_allocator(self): return LeapPython.StringArray_get_allocator(self)
-    def begin(self): return LeapPython.StringArray_begin(self)
-    def end(self): return LeapPython.StringArray_end(self)
-    def rbegin(self): return LeapPython.StringArray_rbegin(self)
-    def rend(self): return LeapPython.StringArray_rend(self)
-    def pop_back(self): return LeapPython.StringArray_pop_back(self)
-    def erase(self, *args): return LeapPython.StringArray_erase(self, *args)
-    def __init__(self, *args): 
-        this = LeapPython.new_StringArray(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def push_back(self, *args): return LeapPython.StringArray_push_back(self, *args)
-    def front(self): return LeapPython.StringArray_front(self)
-    def back(self): return LeapPython.StringArray_back(self)
-    def assign(self, *args): return LeapPython.StringArray_assign(self, *args)
-    def resize(self, *args): return LeapPython.StringArray_resize(self, *args)
-    def insert(self, *args): return LeapPython.StringArray_insert(self, *args)
-    def reserve(self, *args): return LeapPython.StringArray_reserve(self, *args)
-    def capacity(self): return LeapPython.StringArray_capacity(self)
-    __swig_destroy__ = LeapPython.delete_StringArray
-    __del__ = lambda self : None;
-StringArray_swigregister = LeapPython.StringArray_swigregister
-StringArray_swigregister(StringArray)
-
 class Vector(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Vector, name, value)
@@ -527,6 +245,9 @@ class Pointable(Interface):
     for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
     __getattr__ = lambda self, name: _swig_getattr(self, Pointable, name)
     __repr__ = _swig_repr
+    ZONE_NONE = LeapPython.Pointable_ZONE_NONE
+    ZONE_HOVERING = LeapPython.Pointable_ZONE_HOVERING
+    ZONE_TOUCHING = LeapPython.Pointable_ZONE_TOUCHING
     def __init__(self): 
         this = LeapPython.new_Pointable()
         try: self.this.append(this)
@@ -554,6 +275,12 @@ class Pointable(Interface):
     if _newclass:is_finger = _swig_property(LeapPython.Pointable_is_finger_get)
     __swig_getmethods__["is_valid"] = LeapPython.Pointable_is_valid_get
     if _newclass:is_valid = _swig_property(LeapPython.Pointable_is_valid_get)
+    __swig_getmethods__["touch_zone"] = LeapPython.Pointable_touch_zone_get
+    if _newclass:touch_zone = _swig_property(LeapPython.Pointable_touch_zone_get)
+    __swig_getmethods__["touch_distance"] = LeapPython.Pointable_touch_distance_get
+    if _newclass:touch_distance = _swig_property(LeapPython.Pointable_touch_distance_get)
+    __swig_getmethods__["stabilized_tip_position"] = LeapPython.Pointable_stabilized_tip_position_get
+    if _newclass:stabilized_tip_position = _swig_property(LeapPython.Pointable_stabilized_tip_position_get)
     __swig_getmethods__["frame"] = LeapPython.Pointable_frame_get
     if _newclass:frame = _swig_property(LeapPython.Pointable_frame_get)
     __swig_destroy__ = LeapPython.delete_Pointable
@@ -616,10 +343,13 @@ class Hand(Interface):
     def finger(self, *args): return LeapPython.Hand_finger(self, *args)
     def tool(self, *args): return LeapPython.Hand_tool(self, *args)
     def translation(self, *args): return LeapPython.Hand_translation(self, *args)
+    def translation_probability(self, *args): return LeapPython.Hand_translation_probability(self, *args)
     def rotation_axis(self, *args): return LeapPython.Hand_rotation_axis(self, *args)
     def rotation_angle(self, *args): return LeapPython.Hand_rotation_angle(self, *args)
     def rotation_matrix(self, *args): return LeapPython.Hand_rotation_matrix(self, *args)
+    def rotation_probability(self, *args): return LeapPython.Hand_rotation_probability(self, *args)
     def scale_factor(self, *args): return LeapPython.Hand_scale_factor(self, *args)
+    def scale_probability(self, *args): return LeapPython.Hand_scale_probability(self, *args)
     def __eq__(self, *args): return LeapPython.Hand___eq__(self, *args)
     def __ne__(self, *args): return LeapPython.Hand___ne__(self, *args)
     def __str__(self): return LeapPython.Hand___str__(self)
@@ -842,6 +572,7 @@ class Screen(Interface):
         try: self.this.append(this)
         except: self.this = this
     def intersect(self, *args): return LeapPython.Screen_intersect(self, *args)
+    def project(self, *args): return LeapPython.Screen_project(self, *args)
     def normal(self): return LeapPython.Screen_normal(self)
     def distance_to_point(self, *args): return LeapPython.Screen_distance_to_point(self, *args)
     def __eq__(self, *args): return LeapPython.Screen___eq__(self, *args)
@@ -867,6 +598,36 @@ Screen_swigregister = LeapPython.Screen_swigregister
 Screen_swigregister(Screen)
 Screen.invalid = LeapPython.cvar.Screen_invalid
 
+class Device(Interface):
+    __swig_setmethods__ = {}
+    for _s in [Interface]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Device, name, value)
+    __swig_getmethods__ = {}
+    for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, Device, name)
+    __repr__ = _swig_repr
+    def __init__(self): 
+        this = LeapPython.new_Device()
+        try: self.this.append(this)
+        except: self.this = this
+    def distance_to_boundary(self, *args): return LeapPython.Device_distance_to_boundary(self, *args)
+    def __eq__(self, *args): return LeapPython.Device___eq__(self, *args)
+    def __ne__(self, *args): return LeapPython.Device___ne__(self, *args)
+    def __str__(self): return LeapPython.Device___str__(self)
+    __swig_getmethods__["horizontal_view_angle"] = LeapPython.Device_horizontal_view_angle_get
+    if _newclass:horizontal_view_angle = _swig_property(LeapPython.Device_horizontal_view_angle_get)
+    __swig_getmethods__["vertical_view_angle"] = LeapPython.Device_vertical_view_angle_get
+    if _newclass:vertical_view_angle = _swig_property(LeapPython.Device_vertical_view_angle_get)
+    __swig_getmethods__["range"] = LeapPython.Device_range_get
+    if _newclass:range = _swig_property(LeapPython.Device_range_get)
+    __swig_getmethods__["is_valid"] = LeapPython.Device_is_valid_get
+    if _newclass:is_valid = _swig_property(LeapPython.Device_is_valid_get)
+    __swig_destroy__ = LeapPython.delete_Device
+    __del__ = lambda self : None;
+Device_swigregister = LeapPython.Device_swigregister
+Device_swigregister(Device)
+Device.invalid = LeapPython.cvar.Device_invalid
+
 class PointableList(Interface):
     __swig_setmethods__ = {}
     for _s in [Interface]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
@@ -882,8 +643,16 @@ class PointableList(Interface):
     def __len__(self): return LeapPython.PointableList___len__(self)
     def __getitem__(self, *args): return LeapPython.PointableList___getitem__(self, *args)
     def append(self, *args): return LeapPython.PointableList_append(self, *args)
+    __swig_getmethods__["is_empty"] = LeapPython.PointableList_is_empty_get
+    if _newclass:is_empty = _swig_property(LeapPython.PointableList_is_empty_get)
     __swig_getmethods__["empty"] = LeapPython.PointableList_empty_get
     if _newclass:empty = _swig_property(LeapPython.PointableList_empty_get)
+    __swig_getmethods__["leftmost"] = LeapPython.PointableList_leftmost_get
+    if _newclass:leftmost = _swig_property(LeapPython.PointableList_leftmost_get)
+    __swig_getmethods__["rightmost"] = LeapPython.PointableList_rightmost_get
+    if _newclass:rightmost = _swig_property(LeapPython.PointableList_rightmost_get)
+    __swig_getmethods__["frontmost"] = LeapPython.PointableList_frontmost_get
+    if _newclass:frontmost = _swig_property(LeapPython.PointableList_frontmost_get)
     def __iter__(self):
       _pos = 0
       while _pos < len(self):
@@ -910,8 +679,16 @@ class FingerList(Interface):
     def __len__(self): return LeapPython.FingerList___len__(self)
     def __getitem__(self, *args): return LeapPython.FingerList___getitem__(self, *args)
     def append(self, *args): return LeapPython.FingerList_append(self, *args)
+    __swig_getmethods__["is_empty"] = LeapPython.FingerList_is_empty_get
+    if _newclass:is_empty = _swig_property(LeapPython.FingerList_is_empty_get)
     __swig_getmethods__["empty"] = LeapPython.FingerList_empty_get
     if _newclass:empty = _swig_property(LeapPython.FingerList_empty_get)
+    __swig_getmethods__["leftmost"] = LeapPython.FingerList_leftmost_get
+    if _newclass:leftmost = _swig_property(LeapPython.FingerList_leftmost_get)
+    __swig_getmethods__["rightmost"] = LeapPython.FingerList_rightmost_get
+    if _newclass:rightmost = _swig_property(LeapPython.FingerList_rightmost_get)
+    __swig_getmethods__["frontmost"] = LeapPython.FingerList_frontmost_get
+    if _newclass:frontmost = _swig_property(LeapPython.FingerList_frontmost_get)
     def __iter__(self):
       _pos = 0
       while _pos < len(self):
@@ -938,8 +715,16 @@ class ToolList(Interface):
     def __len__(self): return LeapPython.ToolList___len__(self)
     def __getitem__(self, *args): return LeapPython.ToolList___getitem__(self, *args)
     def append(self, *args): return LeapPython.ToolList_append(self, *args)
+    __swig_getmethods__["is_empty"] = LeapPython.ToolList_is_empty_get
+    if _newclass:is_empty = _swig_property(LeapPython.ToolList_is_empty_get)
     __swig_getmethods__["empty"] = LeapPython.ToolList_empty_get
     if _newclass:empty = _swig_property(LeapPython.ToolList_empty_get)
+    __swig_getmethods__["leftmost"] = LeapPython.ToolList_leftmost_get
+    if _newclass:leftmost = _swig_property(LeapPython.ToolList_leftmost_get)
+    __swig_getmethods__["rightmost"] = LeapPython.ToolList_rightmost_get
+    if _newclass:rightmost = _swig_property(LeapPython.ToolList_rightmost_get)
+    __swig_getmethods__["frontmost"] = LeapPython.ToolList_frontmost_get
+    if _newclass:frontmost = _swig_property(LeapPython.ToolList_frontmost_get)
     def __iter__(self):
       _pos = 0
       while _pos < len(self):
@@ -966,8 +751,16 @@ class HandList(Interface):
     def __len__(self): return LeapPython.HandList___len__(self)
     def __getitem__(self, *args): return LeapPython.HandList___getitem__(self, *args)
     def append(self, *args): return LeapPython.HandList_append(self, *args)
+    __swig_getmethods__["is_empty"] = LeapPython.HandList_is_empty_get
+    if _newclass:is_empty = _swig_property(LeapPython.HandList_is_empty_get)
     __swig_getmethods__["empty"] = LeapPython.HandList_empty_get
     if _newclass:empty = _swig_property(LeapPython.HandList_empty_get)
+    __swig_getmethods__["leftmost"] = LeapPython.HandList_leftmost_get
+    if _newclass:leftmost = _swig_property(LeapPython.HandList_leftmost_get)
+    __swig_getmethods__["rightmost"] = LeapPython.HandList_rightmost_get
+    if _newclass:rightmost = _swig_property(LeapPython.HandList_rightmost_get)
+    __swig_getmethods__["frontmost"] = LeapPython.HandList_frontmost_get
+    if _newclass:frontmost = _swig_property(LeapPython.HandList_frontmost_get)
     def __iter__(self):
       _pos = 0
       while _pos < len(self):
@@ -994,6 +787,8 @@ class GestureList(Interface):
     def __len__(self): return LeapPython.GestureList___len__(self)
     def __getitem__(self, *args): return LeapPython.GestureList___getitem__(self, *args)
     def append(self, *args): return LeapPython.GestureList_append(self, *args)
+    __swig_getmethods__["is_empty"] = LeapPython.GestureList_is_empty_get
+    if _newclass:is_empty = _swig_property(LeapPython.GestureList_is_empty_get)
     __swig_getmethods__["empty"] = LeapPython.GestureList_empty_get
     if _newclass:empty = _swig_property(LeapPython.GestureList_empty_get)
     def __iter__(self):
@@ -1022,6 +817,9 @@ class ScreenList(Interface):
     def __len__(self): return LeapPython.ScreenList___len__(self)
     def __getitem__(self, *args): return LeapPython.ScreenList___getitem__(self, *args)
     def closest_screen_hit(self, *args): return LeapPython.ScreenList_closest_screen_hit(self, *args)
+    def closest_screen(self, *args): return LeapPython.ScreenList_closest_screen(self, *args)
+    __swig_getmethods__["is_empty"] = LeapPython.ScreenList_is_empty_get
+    if _newclass:is_empty = _swig_property(LeapPython.ScreenList_is_empty_get)
     __swig_getmethods__["empty"] = LeapPython.ScreenList_empty_get
     if _newclass:empty = _swig_property(LeapPython.ScreenList_empty_get)
     def __iter__(self):
@@ -1034,6 +832,67 @@ class ScreenList(Interface):
     __del__ = lambda self : None;
 ScreenList_swigregister = LeapPython.ScreenList_swigregister
 ScreenList_swigregister(ScreenList)
+
+class DeviceList(Interface):
+    __swig_setmethods__ = {}
+    for _s in [Interface]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, DeviceList, name, value)
+    __swig_getmethods__ = {}
+    for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, DeviceList, name)
+    __repr__ = _swig_repr
+    def __init__(self): 
+        this = LeapPython.new_DeviceList()
+        try: self.this.append(this)
+        except: self.this = this
+    def __len__(self): return LeapPython.DeviceList___len__(self)
+    def __getitem__(self, *args): return LeapPython.DeviceList___getitem__(self, *args)
+    def append(self, *args): return LeapPython.DeviceList_append(self, *args)
+    __swig_getmethods__["is_empty"] = LeapPython.DeviceList_is_empty_get
+    if _newclass:is_empty = _swig_property(LeapPython.DeviceList_is_empty_get)
+    def __iter__(self):
+      _pos = 0
+      while _pos < len(self):
+        yield self[_pos]
+        _pos += 1
+
+    __swig_destroy__ = LeapPython.delete_DeviceList
+    __del__ = lambda self : None;
+DeviceList_swigregister = LeapPython.DeviceList_swigregister
+DeviceList_swigregister(DeviceList)
+
+class InteractionBox(Interface):
+    __swig_setmethods__ = {}
+    for _s in [Interface]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, InteractionBox, name, value)
+    __swig_getmethods__ = {}
+    for _s in [Interface]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, InteractionBox, name)
+    __repr__ = _swig_repr
+    def __init__(self): 
+        this = LeapPython.new_InteractionBox()
+        try: self.this.append(this)
+        except: self.this = this
+    def normalize_point(self, *args): return LeapPython.InteractionBox_normalize_point(self, *args)
+    def denormalize_point(self, *args): return LeapPython.InteractionBox_denormalize_point(self, *args)
+    def __eq__(self, *args): return LeapPython.InteractionBox___eq__(self, *args)
+    def __ne__(self, *args): return LeapPython.InteractionBox___ne__(self, *args)
+    def __str__(self): return LeapPython.InteractionBox___str__(self)
+    __swig_getmethods__["center"] = LeapPython.InteractionBox_center_get
+    if _newclass:center = _swig_property(LeapPython.InteractionBox_center_get)
+    __swig_getmethods__["width"] = LeapPython.InteractionBox_width_get
+    if _newclass:width = _swig_property(LeapPython.InteractionBox_width_get)
+    __swig_getmethods__["height"] = LeapPython.InteractionBox_height_get
+    if _newclass:height = _swig_property(LeapPython.InteractionBox_height_get)
+    __swig_getmethods__["depth"] = LeapPython.InteractionBox_depth_get
+    if _newclass:depth = _swig_property(LeapPython.InteractionBox_depth_get)
+    __swig_getmethods__["is_valid"] = LeapPython.InteractionBox_is_valid_get
+    if _newclass:is_valid = _swig_property(LeapPython.InteractionBox_is_valid_get)
+    __swig_destroy__ = LeapPython.delete_InteractionBox
+    __del__ = lambda self : None;
+InteractionBox_swigregister = LeapPython.InteractionBox_swigregister
+InteractionBox_swigregister(InteractionBox)
+InteractionBox.invalid = LeapPython.cvar.InteractionBox_invalid
 
 class Frame(Interface):
     __swig_setmethods__ = {}
@@ -1054,10 +913,13 @@ class Frame(Interface):
     def gesture(self, *args): return LeapPython.Frame_gesture(self, *args)
     def gestures(self, *args): return LeapPython.Frame_gestures(self, *args)
     def translation(self, *args): return LeapPython.Frame_translation(self, *args)
+    def translation_probability(self, *args): return LeapPython.Frame_translation_probability(self, *args)
     def rotation_axis(self, *args): return LeapPython.Frame_rotation_axis(self, *args)
     def rotation_angle(self, *args): return LeapPython.Frame_rotation_angle(self, *args)
     def rotation_matrix(self, *args): return LeapPython.Frame_rotation_matrix(self, *args)
+    def rotation_probability(self, *args): return LeapPython.Frame_rotation_probability(self, *args)
     def scale_factor(self, *args): return LeapPython.Frame_scale_factor(self, *args)
+    def scale_probability(self, *args): return LeapPython.Frame_scale_probability(self, *args)
     def __eq__(self, *args): return LeapPython.Frame___eq__(self, *args)
     def __ne__(self, *args): return LeapPython.Frame___ne__(self, *args)
     def __str__(self): return LeapPython.Frame___str__(self)
@@ -1065,16 +927,18 @@ class Frame(Interface):
     if _newclass:id = _swig_property(LeapPython.Frame_id_get)
     __swig_getmethods__["timestamp"] = LeapPython.Frame_timestamp_get
     if _newclass:timestamp = _swig_property(LeapPython.Frame_timestamp_get)
-    __swig_getmethods__["hands"] = LeapPython.Frame_hands_get
-    if _newclass:hands = _swig_property(LeapPython.Frame_hands_get)
     __swig_getmethods__["pointables"] = LeapPython.Frame_pointables_get
     if _newclass:pointables = _swig_property(LeapPython.Frame_pointables_get)
     __swig_getmethods__["fingers"] = LeapPython.Frame_fingers_get
     if _newclass:fingers = _swig_property(LeapPython.Frame_fingers_get)
     __swig_getmethods__["tools"] = LeapPython.Frame_tools_get
     if _newclass:tools = _swig_property(LeapPython.Frame_tools_get)
+    __swig_getmethods__["hands"] = LeapPython.Frame_hands_get
+    if _newclass:hands = _swig_property(LeapPython.Frame_hands_get)
     __swig_getmethods__["is_valid"] = LeapPython.Frame_is_valid_get
     if _newclass:is_valid = _swig_property(LeapPython.Frame_is_valid_get)
+    __swig_getmethods__["interaction_box"] = LeapPython.Frame_interaction_box_get
+    if _newclass:interaction_box = _swig_property(LeapPython.Frame_interaction_box_get)
     __swig_destroy__ = LeapPython.delete_Frame
     __del__ = lambda self : None;
 Frame_swigregister = LeapPython.Frame_swigregister
@@ -1096,11 +960,7 @@ class Config(Interface):
     TYPE_UNKNOWN = LeapPython.Config_TYPE_UNKNOWN
     TYPE_BOOLEAN = LeapPython.Config_TYPE_BOOLEAN
     TYPE_INT32 = LeapPython.Config_TYPE_INT32
-    TYPE_INT64 = LeapPython.Config_TYPE_INT64
-    TYPE_UINT32 = LeapPython.Config_TYPE_UINT32
-    TYPE_UINT64 = LeapPython.Config_TYPE_UINT64
     TYPE_FLOAT = LeapPython.Config_TYPE_FLOAT
-    TYPE_DOUBLE = LeapPython.Config_TYPE_DOUBLE
     TYPE_STRING = LeapPython.Config_TYPE_STRING
 
 
@@ -1111,50 +971,29 @@ class Config(Interface):
 
 
 
-
-
-
-
-
-
-
+    def save(self): return LeapPython.Config_save(self)
     def get(self, *args):
       type = LeapPython.Config_type(self, *args)
-      if LeapPython.Config_is_array(self, *args):
-        if type == LeapPython.Config_TYPE_BOOLEAN:
-          return LeapPython.Config_get_bool_array(self, *args)
-        elif type == LeapPython.Config_TYPE_INT32:
-          return LeapPython.Config_get_int_32array(self, *args)
-        elif type == LeapPython.Config_TYPE_INT64:
-          return LeapPython.Config_get_int_32array(self, *args)
-        elif type == LeapPython.Config_TYPE_UINT32:
-          return LeapPython.Config_get_uint_32array(self, *args)
-        elif type == LeapPython.Config_TYPE_UINT64:
-          return LeapPython.Config_get_uint_32array(self, *args)
-        elif type == LeapPython.Config_TYPE_FLOAT:
-          return LeapPython.Config_get_float_array(self, *args)
-        elif type == LeapPython.Config_TYPE_DOUBLE:
-          return LeapPython.Config_get_double_array(self, *args)
-        elif type == LeapPython.Config_TYPE_STRING:
-          return LeapPython.Config_get_string_array(self, *args)
-      else:
-        if type == LeapPython.Config_TYPE_BOOLEAN:
-          return LeapPython.Config_get_bool(self, *args)
-        elif type == LeapPython.Config_TYPE_INT32:
-          return LeapPython.Config_get_int_32(self, *args)
-        elif type == LeapPython.Config_TYPE_INT64:
-          return LeapPython.Config_get_int_64(self, *args)
-        elif type == LeapPython.Config_TYPE_UINT32:
-          return LeapPython.Config_get_uint_32(self, *args)
-        elif type == LeapPython.Config_TYPE_UINT64:
-          return LeapPython.Config_get_uint_64(self, *args)
-        elif type == LeapPython.Config_TYPE_FLOAT:
-          return LeapPython.Config_get_float(self, *args)
-        elif type == LeapPython.Config_TYPE_DOUBLE:
-          return LeapPython.Config_get_double(self, *args)
-        elif type == LeapPython.Config_TYPE_STRING:
-          return LeapPython.Config_get_string(self, *args)
+      if type == LeapPython.Config_TYPE_BOOLEAN:
+        return LeapPython.Config_get_bool(self, *args)
+      elif type == LeapPython.Config_TYPE_INT32:
+        return LeapPython.Config_get_int_32(self, *args)
+      elif type == LeapPython.Config_TYPE_FLOAT:
+        return LeapPython.Config_get_float(self, *args)
+      elif type == LeapPython.Config_TYPE_STRING:
+        return LeapPython.Config_get_string(self, *args)
       return None
+    def set(self, *args):
+      type = LeapPython.Config_type(self, *args[:-1])  # Do not pass value through
+      if type == LeapPython.Config_TYPE_BOOLEAN:
+        return LeapPython.Config_set_bool(self, *args)
+      elif type == LeapPython.Config_TYPE_INT32:
+        return LeapPython.Config_set_int_32(self, *args)
+      elif type == LeapPython.Config_TYPE_FLOAT:
+        return LeapPython.Config_set_float(self, *args)
+      elif type == LeapPython.Config_TYPE_STRING:
+        return LeapPython.Config_set_string(self, *args)
+      return False
 
     __swig_destroy__ = LeapPython.delete_Config
     __del__ = lambda self : None;
@@ -1175,6 +1014,9 @@ class Controller(Interface):
         this = LeapPython.new_Controller(*args)
         try: self.this.append(this)
         except: self.this = this
+    POLICY_DEFAULT = LeapPython.Controller_POLICY_DEFAULT
+    POLICY_BACKGROUND_FRAMES = LeapPython.Controller_POLICY_BACKGROUND_FRAMES
+    def set_policy_flags(self, *args): return LeapPython.Controller_set_policy_flags(self, *args)
     def add_listener(self, *args): return LeapPython.Controller_add_listener(self, *args)
     def remove_listener(self, *args): return LeapPython.Controller_remove_listener(self, *args)
     def frame(self, history=0): return LeapPython.Controller_frame(self, history)
@@ -1182,10 +1024,18 @@ class Controller(Interface):
     def is_gesture_enabled(self, *args): return LeapPython.Controller_is_gesture_enabled(self, *args)
     __swig_getmethods__["is_connected"] = LeapPython.Controller_is_connected_get
     if _newclass:is_connected = _swig_property(LeapPython.Controller_is_connected_get)
+    __swig_getmethods__["has_focus"] = LeapPython.Controller_has_focus_get
+    if _newclass:has_focus = _swig_property(LeapPython.Controller_has_focus_get)
+    __swig_getmethods__["policy_flags"] = LeapPython.Controller_policy_flags_get
+    if _newclass:policy_flags = _swig_property(LeapPython.Controller_policy_flags_get)
     __swig_getmethods__["config"] = LeapPython.Controller_config_get
     if _newclass:config = _swig_property(LeapPython.Controller_config_get)
+    __swig_getmethods__["located_screens"] = LeapPython.Controller_located_screens_get
+    if _newclass:located_screens = _swig_property(LeapPython.Controller_located_screens_get)
     __swig_getmethods__["calibrated_screens"] = LeapPython.Controller_calibrated_screens_get
     if _newclass:calibrated_screens = _swig_property(LeapPython.Controller_calibrated_screens_get)
+    __swig_getmethods__["devices"] = LeapPython.Controller_devices_get
+    if _newclass:devices = _swig_property(LeapPython.Controller_devices_get)
 Controller_swigregister = LeapPython.Controller_swigregister
 Controller_swigregister(Controller)
 
@@ -1210,6 +1060,8 @@ class Listener(_object):
     def on_disconnect(self, *args): return LeapPython.Listener_on_disconnect(self, *args)
     def on_exit(self, *args): return LeapPython.Listener_on_exit(self, *args)
     def on_frame(self, *args): return LeapPython.Listener_on_frame(self, *args)
+    def on_focus_gained(self, *args): return LeapPython.Listener_on_focus_gained(self, *args)
+    def on_focus_lost(self, *args): return LeapPython.Listener_on_focus_lost(self, *args)
     def __disown__(self):
         self.this.disown()
         LeapPython.disown_Listener(self)

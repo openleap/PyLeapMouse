@@ -3,11 +3,7 @@
 
 
 import math
-import sys
-if sys.platform == "darwin":
-    import OSX.Leap as Leap
-else:
-    import Windows.Leap as Leap
+from leap import Leap
 
 
 def to_vector(leap_vector):
