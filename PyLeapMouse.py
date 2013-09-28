@@ -4,6 +4,7 @@ import sys
 from leap import Leap, Mouse
 from PalmControl import Palm_Control_Listener  #For palm-tilt based control
 from FingerControl import Finger_Control_Listener  #For finger-pointing control
+from MotionControl import Motion_Control_Listener  #For motion control
 
 def show_help():
     print "----------------------------------PyLeapMouse----------------------------------"
@@ -23,6 +24,8 @@ def main():
 
     #Default
     finger_mode = True
+    palm_mode = False
+    motion_mode = False
     smooth_aggressiveness = 8
     smooth_falloff = 1.3
 
@@ -30,6 +33,12 @@ def main():
         arg = sys.argv[i].lower()
         if "--palm" in arg:
             finger_mode = False
+            palm_mode = True
+            motion_mode = False
+        if "--motion" in arg:
+            finger_mode = False
+            palm_mode = False
+            motion_mode = True
         if "--smooth-falloff" in arg:
             smooth_falloff = float(sys.argv[i+1])
         if "--smooth-aggressiveness" in arg:
@@ -41,9 +50,12 @@ def main():
     if finger_mode:  #Finger pointer mode
         listener = Finger_Control_Listener(Mouse, smooth_aggressiveness=smooth_aggressiveness, smooth_falloff=smooth_falloff)
         print "Using finger mode..."
-    else:  #Palm control mode
+    elif palm_mode:  #Palm control mode
         listener = Palm_Control_Listener(Mouse)
         print "Using palm mode..."
+    elif motion_mode:  #Motion control mode
+        listener = Motion_Control_Listener(Mouse)
+        print "Using motion mode..."
 
 
     controller = Leap.Controller()  #Get a Leap controller
