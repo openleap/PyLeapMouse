@@ -59,6 +59,7 @@ def main():
 
 
     controller = Leap.Controller()  #Get a Leap controller
+    controller.set_policy_flags(Leap.Controller.POLICY_BACKGROUND_FRAMES)
     print "Adding Listener."
     controller.add_listener(listener)  #Attach the listener
 
