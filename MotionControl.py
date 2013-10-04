@@ -43,7 +43,7 @@ class Motion_Control_Listener(Leap.Listener):  #The Listener that we attach to t
 
     def on_frame(self, controller):
         frame = controller.frame()  #Grab the latest 3D data
-        if not frame.hands.empty:  #Make sure we have some hands to work with
+        if not frame.hands.is_empty:  #Make sure we have some hands to work with
             for command in self.commands: #Loop all enabled commands
                 if(command.applicable(frame)): #If the motion associated to the command is triggered
                     self.execute(frame, command.name) #Execute the command

@@ -30,7 +30,7 @@ class Palm_Control_Listener(Leap.Listener):  #The Listener that we attach to the
 
     def on_frame(self, controller):
         frame = controller.frame()  #Grab the latest 3D data
-        if not frame.hands.empty:  #Make sure we have some hands to work with
+        if not frame.hands.is_empty:  #Make sure we have some hands to work with
             rightmost_hand = None  #We always have at least one "right hand"
             if len(frame.hands) < 2:  #Just one hand
                 self.do_mouse_stuff(frame.hands[0])  #If there's only one hand, we assume it's to be used for mouse control
