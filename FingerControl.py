@@ -4,6 +4,7 @@
 
 
 import math
+import sys
 from leap import Leap, Mouse
 from MiscFunctions import *
 
@@ -21,7 +22,8 @@ class Finger_Control_Listener(Leap.Listener):  #The Listener that we attach to t
 
     def on_init(self, controller):
         if controller.located_screens.is_empty:
-            print "Calibrate your Leap screen feature"
+            print "Please calibrate your Leap screen feature."
+            sys.exit(0)
         else:
             print "Found a screen..."
             self.screen = controller.located_screens[0]
