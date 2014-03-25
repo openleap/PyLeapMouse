@@ -14,21 +14,13 @@ class Finger_Control_Listener(Leap.Listener):  #The Listener that we attach to t
         super(Finger_Control_Listener, self).__init__()  #Initialize like a normal listener
         #Initialize a bunch of stuff specific to this implementation
         self.screen = None
-        self.screen_resolution = (0,0)
+        self.screen_resolution = (1920,1080)
         self.cursor = mouse.absolute_cursor()  #The cursor object that lets us control mice cross-platform
         self.mouse_position_smoother = mouse_position_smoother(smooth_aggressiveness, smooth_falloff) #Keeps the cursor from fidgeting
         self.mouse_button_debouncer = debouncer(5)  #A signal debouncer that ensures a reliable, non-jumpy click
         self.most_recent_pointer_finger_id = None  #This holds the ID of the most recently used pointing finger, to prevent annoying switching
 
     def on_init(self, controller):
-        if controller.located_screens.is_empty:
-            print "Please calibrate your Leap screen feature."
-            sys.exit(0)
-        else:
-            print "Found a screen..."
-            self.screen = controller.located_screens[0]
-            self.screen_resolution = (self.screen.width_pixels, self.screen.height_pixels)
-
         print "Initialized"
 
     def on_connect(self, controller):
@@ -42,12 +34,15 @@ class Finger_Control_Listener(Leap.Listener):  #The Listener that we attach to t
 
     def on_frame(self, controller):
         frame = controller.frame()  #Grab the latest 3D data
-        if not frame.hands.is_empty:  #Make sure we have some hands to work with
-            hand = frame.hands[0]  #The first hand
-            if has_two_pointer_fingers(hand):  #Scroll mode
-                self.do_scroll_stuff(hand)
-            else:  #Mouse mode
-                self.do_mouse_stuff(hand)
+        finger = frame.fingers.frontmost
+        stabilizedPosition = finger.stabilized_tip_position
+        interactionBox = frame.interaction_box
+        normalizedPosition = interactionBox.normalize_point(stabilizedPosition)
+        if(finger.touch_distance > 0 and finger.touch_zone != Leap.Pointable.ZONE_NONE):
+	    self.cursor.set_left_button_pressed(False)
+        elif(finger.touch_distance <= 0):
+            self.cursor.set_left_button_pressed(True)
+        self.cursor.move(normalizedPosition.x * self.screen_resolution[0], self.screen_resolution[1] - normalizedPosition.y * self.screen_resolution[1])
 
     def do_scroll_stuff(self, hand):  #Take a hand and use it as a scroller
         fingers = hand.fingers  #The list of fingers on said hand
