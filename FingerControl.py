@@ -38,11 +38,31 @@ class Finger_Control_Listener(Leap.Listener):  #The Listener that we attach to t
         stabilizedPosition = finger.stabilized_tip_position
         interactionBox = frame.interaction_box
         normalizedPosition = interactionBox.normalize_point(stabilizedPosition)
-        if(finger.touch_distance > 0 and finger.touch_zone != Leap.Pointable.ZONE_NONE):
-	    self.cursor.set_left_button_pressed(False)
-        elif(finger.touch_distance <= 0):
-            self.cursor.set_left_button_pressed(True)
-        self.cursor.move(normalizedPosition.x * self.screen_resolution[0], self.screen_resolution[1] - normalizedPosition.y * self.screen_resolution[1])
+        if finger.touch_zone > 0:
+            finger_count = len(frame.fingers)
+            if finger.touch_zone == 1:
+                self.cursor.set_left_button_pressed(False)
+                if finger_count < 5:
+                    self.cursor.move(normalizedPosition.x * self.screen_resolution[0], self.screen_resolution[1] - normalizedPosition.y * self.screen_resolution[1])
+                elif finger_count == 5:
+                    finger_velocity = finger.tip_velocity
+                    x_scroll = self.velocity_to_scroll_amount(finger_velocity.x)
+                    y_scroll = self.velocity_to_scroll_amount(finger_velocity.y)
+                    self.cursor.scroll(x_scroll, y_scroll)
+                else:
+                    print "Finger count: %s" % finger_count
+            elif finger.touch_zone == 2:
+                if finger_count == 1:
+                    self.cursor.set_left_button_pressed(True)
+                elif finger_count == 2:
+                    self.cursor.set_left_button_pressed(True)
+                    self.cursor.move(normalizedPosition.x * self.screen_resolution[0], self.screen_resolution[1] - normalizedPosition.y * self.screen_resolution[1])
+        #if(finger.touch_distance > -0.3 and finger.touch_zone != Leap.Pointable.ZONE_NONE):
+	    #self.cursor.set_left_button_pressed(False)
+	    #self.cursor.move(normalizedPosition.x * self.screen_resolution[0], self.screen_resolution[1] - normalizedPosition.y * self.screen_resolution[1])
+        #elif(finger.touch_distance <= -0.4):
+            #self.cursor.set_left_button_pressed(True)
+        #    print finger.touch_distance
 
     def do_scroll_stuff(self, hand):  #Take a hand and use it as a scroller
         fingers = hand.fingers  #The list of fingers on said hand
