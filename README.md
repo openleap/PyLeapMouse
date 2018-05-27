@@ -66,7 +66,7 @@ Movements are associated with commands listed in a file `commands.ini` placed at
 Every commands could have a different behaviour if 1, 2, 3 ... 10 fingers are recognized but It's recommanded to use the same command for each number of fingers due to a lack of precision with Leap Motion.
 
 ###Notes:
-This is a spare-time project, so it's not perfect quality. However, I tried to keep the code clean and readable. Let me know if you find any bugs (which there are certainly at least a few of). You can reach me at  will (dot) yager (at) gmail (dot) (what the gmail domain ends in).
+This is a spare-time project, so it's not perfect quality. However, I tried to keep the code clean and readable. Let me know if you find any bugs (which there are certainly at least a few of).
 The contents of the files are as follows:
 PyLeapMouse.py: The actual program
 FingerControl.py: Pointer-finger-control specific code
