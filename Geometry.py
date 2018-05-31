@@ -1,5 +1,5 @@
-#William Yager
-#Leap Python mouse controller POC
+# William Yager
+# Leap Python mouse controller POC
 
 
 import math
@@ -56,6 +56,7 @@ class segment(object):
         self.point1 = point1
         self.point2 = point2
     #Shortest distance code based off of http://geomalgorithms.com/a07-_distance.html
+
     def min_distance_infinite(self, other):  #Return shortest distance between two lines
         u = self.point2 - self.point1
         v = other.point2 - other.point1
@@ -80,11 +81,12 @@ class segment(object):
             tc = (a * e - b * d) / D
         dP = w + u**sc - v**tc
         return dP.norm()
-    def min_distance_finite(self, other):  #Return shortest distance between two segments
+
+    def min_distance_finite(self, other):  # Return shortest distance between two segments
         u = self.point2 - self.point1
         v = other.point2 - other.point1
         w = self.point1 - other.point1
-        a = u * u  #* here is cross product
+        a = u * u  # * here is cross product
         b = u * v
         c = v * v
         d = u * w
@@ -139,7 +141,7 @@ class segment(object):
             tc = 0.0
         else:
             tc = tN / tD
-        dP = w + u**sc - v**tc  #I'm pretty sure dP is the actual vector linking the lines
+        dP = w + u**sc - v**tc  # I'm pretty sure dP is the actual vector linking the lines
         return dP.norm()
 
 
@@ -151,8 +153,8 @@ class line(segment):
 
 
 def angle_between_vectors(vector1, vector2):
-    #cos(theta)=dot product / (|a|*|b|)
-    top = vector1 * vector2  #* is dot product
+    # cos(theta)=dot product / (|a|*|b|)
+    top = vector1 * vector2  # * is dot product
     bottom = vector1.norm() * vector2.norm()
     angle = math.acos(top/bottom)
-    return angle  #In radians
+    return angle  # In radians
