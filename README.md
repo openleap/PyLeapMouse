@@ -63,7 +63,7 @@ Movements are associated with commands listed in a file `commands.ini` placed at
     4finger: rhythmbox-client --pause
     5finger: rhythmbox-client --pause
 
-Every commands could have a different behaviour if 1, 2, 3 ... 10 fingers are recognized but It's recommanded to use the same command for each number of fingers due to a lack of precision with Leap Motion.
+Every commands could have a different behaviour if 1, 2, 3 ... 10 fingers are recognized but It's recommended to use the same command for each number of fingers due to a lack of precision with Leap Motion.
 
 ### Notes:
 This is a spare-time project, so it's not perfect quality. However, I tried to keep the code clean and readable. Let me know if you find any bugs (which there are certainly at least a few of).

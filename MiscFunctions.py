@@ -46,7 +46,7 @@ class debouncer(object):  #Takes a binary "signal" and debounces it.
     def signal(self, value):  #Update the signal.
         if value != self.state:  #We are receiving a different signal than what we have been.
             self.opposite_counter = self.opposite_counter + 1
-        else:  #We are recieving the same signal that we have been
+        else:  #We are receiving the same signal that we have been
             self.opposite_counter = self.opposite_counter - 1
 
         if self.opposite_counter < 0: self.opposite_counter = 0
@@ -100,7 +100,7 @@ def has_thumb(hand):  #The level of accuracy with this function is surprisingly 
     average = sum(distances)/len(distances)
     minimum = min(distances)
     if average - minimum > 20:  #Check if the finger closest to the palm is more than 20mm closer than the average distance
-        #Note: I have recieved feedback that a smaller value may work better. I do have big hands, however
+        #Note: I have received feedback that a smaller value may work better. I do have big hands, however
         return True
     else:
         return False
